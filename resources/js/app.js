@@ -24,6 +24,8 @@ Vue.use(VueRouter);
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 //Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+Vue.component('add-employee', require('./components/AddEmployeeComponent.vue').default);
+Vue.component('pagination', require('laravel-vue-pagination'));
 
 import Home from './components/HomeComponent.vue';
 import Employees from './components/EmployeesComponent';

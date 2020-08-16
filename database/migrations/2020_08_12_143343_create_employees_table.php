@@ -18,16 +18,14 @@ class CreateEmployeesTable extends Migration
             $table->string('e_card_id')->unique();
             $table->string('e_last_name');
             $table->string('e_first_name');
-            $table->string('e_birthday_date');
-            $table->string('e_city of birth');
+            $table->date('e_birthday_date');
+            $table->string('e_city_of_birth');
             $table->string('e_number');
             $table->string('e_email')->unique();
-            $table->string('c_city');
-            $table->string('c_adress');
-            $table->string('postal code');
-            $table->boolean('e_available');
+            $table->string('e_city');
+            $table->string('e_adress');
+            $table->string('e_postal_code');
             $table->string('e_status',20);
-            $table->string('e_image')->nullable();
             $table->timestamps();
         });
     }

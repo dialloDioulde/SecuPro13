@@ -14,7 +14,7 @@ class EmployeeController extends Controller
     public function index()
     {
         //
-        $employees = Employee::all();
+        $employees = Employee::paginate(10);
         return response()->json($employees);
     }
 
@@ -32,11 +32,18 @@ class EmployeeController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(Request $request)
     {
         //
+        $employees = Employee::create($request->all());
+
+        if ($employees){
+            $employees = Employee::paginate(10);
+
+            return response()->json($employees);
+        }
     }
 
     /**

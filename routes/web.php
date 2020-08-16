@@ -18,3 +18,8 @@ Route::get('/', function () {
 });
 
 Route::get('/employeesLists', 'EmployeeController@index');
+Route::post('/employeesLists', 'EmployeeController@store');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
