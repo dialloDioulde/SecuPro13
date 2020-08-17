@@ -2,15 +2,15 @@
     <div class="container">
         <!-- Button trigger modal -->
         <button type="button" class="btn btn-primary my-3" data-toggle="modal" data-target="#addModal">
-            Ajouté Un Employé
+            INSCRIRE
         </button>
 
         <!-- Modal -->
         <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-xl">
                 <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="addModalLabel">INSCRIPTION AGENT</h5>
+                    <div class="modal-header bg-success">
+                        <h5 class="modal-title text-white" id="addModalLabel">INSCRIPTION D'UN AGENT</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -78,7 +78,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">ANNULER</button>
-                        <button type="button" class="btn btn-success" @click="addEmployee">VALIDER</button>
+                        <button type="button" class="btn btn-success" @click="addEmployee" data-dismiss="modal">INSCRIRE</button>
                     </div>
                 </div>
             </div>

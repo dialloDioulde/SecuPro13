@@ -2240,11 +2240,43 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       employees: {},
-      employeesToEdit: {}
+      employeesToEdit: {},
+      words: ''
     };
   },
   created: function created() {
@@ -2282,6 +2314,23 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (error) {
         return console.log(error);
       });
+    },
+    employeesSerach: function employeesSerach() {
+      var _this5 = this;
+
+      if (this.words.length !== 0) {
+        axios.get('http://127.0.0.1:8000/employeesLists/' + this.words).then(function (response) {
+          return _this5.employees = response.data;
+        })["catch"](function (error) {
+          return console.log(error);
+        });
+      } else {
+        axios.get('http://127.0.0.1:8000/employeesLists').then(function (response) {
+          return _this5.employees = response.data;
+        })["catch"](function (error) {
+          return console.log(error);
+        });
+      }
     },
     employeesRefresh: function employeesRefresh(employees) {
       this.employees = employees.data;
@@ -38503,7 +38552,7 @@ var render = function() {
           "data-target": "#addModal"
         }
       },
-      [_vm._v("\n        Ajouté Un Employé\n    ")]
+      [_vm._v("\n        INSCRIRE\n    ")]
     ),
     _vm._v(" "),
     _c(
@@ -38884,10 +38933,10 @@ var render = function() {
                 "button",
                 {
                   staticClass: "btn btn-success",
-                  attrs: { type: "button" },
+                  attrs: { type: "button", "data-dismiss": "modal" },
                   on: { click: _vm.addEmployee }
                 },
-                [_vm._v("VALIDER")]
+                [_vm._v("INSCRIRE")]
               )
             ])
           ])
@@ -38901,10 +38950,15 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-header" }, [
-      _c("h5", { staticClass: "modal-title", attrs: { id: "addModalLabel" } }, [
-        _vm._v("INSCRIPTION AGENT")
-      ]),
+    return _c("div", { staticClass: "modal-header bg-success" }, [
+      _c(
+        "h5",
+        {
+          staticClass: "modal-title text-white",
+          attrs: { id: "addModalLabel" }
+        },
+        [_vm._v("INSCRIPTION D'UN AGENT")]
+      ),
       _vm._v(" "),
       _c(
         "button",
@@ -38957,7 +39011,20 @@ var render = function() {
       [
         _c("div", { staticClass: "modal-dialog modal-xl" }, [
           _c("div", { staticClass: "modal-content" }, [
-            _vm._m(0),
+            _c("div", { staticClass: "modal-header" }, [
+              _c(
+                "h5",
+                { staticClass: "modal-title", attrs: { id: "editModalLabel" } },
+                [
+                  _vm._v(
+                    "ÉDITION DES INFORMATIONS DE " +
+                      _vm._s(this.employeesToEdit.e_last_name)
+                  )
+                ]
+              ),
+              _vm._v(" "),
+              _vm._m(0)
+            ]),
             _vm._v(" "),
             _c("div", { staticClass: "modal-body" }, [
               _c("form", [
@@ -39382,26 +39449,18 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-header" }, [
-      _c(
-        "h5",
-        { staticClass: "modal-title", attrs: { id: "editModalLabel" } },
-        [_vm._v("ÉDITION DES INFORMATIONS DE L'AGENT DIALLO")]
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "close",
-          attrs: {
-            type: "button",
-            "data-dismiss": "modal",
-            "aria-label": "Close"
-          }
-        },
-        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-      )
-    ])
+    return _c(
+      "button",
+      {
+        staticClass: "close",
+        attrs: {
+          type: "button",
+          "data-dismiss": "modal",
+          "aria-label": "Close"
+        }
+      },
+      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+    )
   }
 ]
 render._withStripped = true
@@ -39429,11 +39488,38 @@ var render = function() {
     "div",
     { staticClass: "container-fluid" },
     [
+      _c("div", { staticClass: "form-row" }, [
+        _c("div", { staticClass: "col-row" }, [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.words,
+                expression: "words"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { type: "text", placeholder: "Rechercher..." },
+            domProps: { value: _vm.words },
+            on: {
+              keyup: _vm.employeesSerach,
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.words = $event.target.value
+              }
+            }
+          })
+        ])
+      ]),
+      _vm._v(" "),
       _c("add-employee", { on: { "employee-added": _vm.employeesRefresh } }),
       _vm._v(" "),
       _c(
         "table",
-        { staticClass: "table table-hover  table-responsive ml-2" },
+        { staticClass: "table table-hover  table-responsive ml-3" },
         [
           _vm._m(0),
           _vm._v(" "),
@@ -39481,17 +39567,65 @@ var render = function() {
                         type: "button",
                         "data-toggle": "modal",
                         "data-target": "#deleteModal"
-                      },
-                      on: {
-                        click: function($event) {
-                          return _vm.deleteEmployee(employee.id)
-                        }
                       }
                     },
                     [
                       _vm._v(
                         "\n                    SUPPRIMER\n                "
                       )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "modal fade",
+                      attrs: {
+                        id: "deleteModal",
+                        tabindex: "-1",
+                        "aria-labelledby": "deleteModalLabel",
+                        "aria-hidden": "true"
+                      }
+                    },
+                    [
+                      _c("div", { staticClass: "modal-dialog" }, [
+                        _c("div", { staticClass: "modal-content" }, [
+                          _vm._m(1, true),
+                          _vm._v(" "),
+                          _vm._m(2, true),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "modal-footer" }, [
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-secondary",
+                                attrs: {
+                                  type: "button",
+                                  "data-dismiss": "modal"
+                                }
+                              },
+                              [_vm._v("ANNULER")]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-danger",
+                                attrs: {
+                                  type: "button",
+                                  "data-dismiss": "modal"
+                                },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.deleteEmployee(employee.id)
+                                  }
+                                }
+                              },
+                              [_vm._v("CONFIRMER")]
+                            )
+                          ])
+                        ])
+                      ])
                     ]
                   )
                 ])
@@ -39540,6 +39674,53 @@ var staticRenderFns = [
         _c("th", { attrs: { scope: "col" } }, [_vm._v("ACTIONS")])
       ])
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header bg-danger" }, [
+      _c(
+        "h5",
+        {
+          staticClass: "modal-title text-white",
+          attrs: { id: "deleteModalLabel" }
+        },
+        [_vm._v("CONFIRMATION DE SUPPRESSION")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "modal-body", staticStyle: { "font-size": "18px" } },
+      [
+        _vm._v(
+          "\n                                Attention cette action est Irreversible ! "
+        ),
+        _c("br"),
+        _c("br"),
+        _vm._v(
+          "\n\n                                Confirmer votre action ?\n\n                            "
+        )
+      ]
+    )
   }
 ]
 render._withStripped = true

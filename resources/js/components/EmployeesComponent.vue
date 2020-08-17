@@ -1,9 +1,15 @@
 <template>
     <div class="container-fluid">
 
+        <div class="form-row">
+            <div class="col-row">
+                <input type="text" class="form-control" @keyup="employeesSerach" v-model="words" placeholder="Rechercher...">
+            </div>
+        </div>
+
         <add-employee @employee-added="employeesRefresh"></add-employee>
 
-        <table class="table table-hover  table-responsive ml-2">
+        <table class="table table-hover  table-responsive ml-3">
             <thead class="bg-info">
             <tr style="font-size: 16px">
                 <th scope="row">ID</th>
@@ -32,9 +38,34 @@
                         EDITER
                     </button>
                     <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-danger ml-2" data-toggle="modal" data-target="#deleteModal" @click="deleteEmployee(employee.id)">
+                    <button type="button" class="btn btn-danger ml-2" data-toggle="modal" data-target="#deleteModal">
                         SUPPRIMER
                     </button>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header bg-danger">
+                                    <h5 class="modal-title text-white" id="deleteModalLabel">CONFIRMATION DE SUPPRESSION</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body" style="font-size: 18px">
+                                    Attention cette action est Irreversible ! <br><br>
+
+                                    Confirmer votre action ?
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">ANNULER</button>
+                                    <button type="button" class="btn btn-danger" @click="deleteEmployee(employee.id)" data-dismiss="modal">CONFIRMER</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </td>
 
             </tr>
@@ -56,12 +87,13 @@
             return {
                 employees: {},
                 employeesToEdit: {},
+                words: '',
             }
         },
         created() {
             axios.get('http://127.0.0.1:8000/employeesLists')
-            .then(response => this.employees = response.data)
-            .catch(error => console.log(error));
+                .then(response => this.employees = response.data)
+                .catch(error => console.log(error));
         },
         methods:{
             getResults(page = 1){
@@ -79,6 +111,18 @@
                 axios.delete('http://127.0.0.1:8000/employees/' + id)
                 .then(response => this.employees = response.data)
                 .catch(error => console.log(error));
+            },
+            employeesSerach(){
+                if(this.words.length !== 0){
+                    axios.get('http://127.0.0.1:8000/employeesLists/' + this.words)
+                    .then(response => this.employees = response.data)
+                    .catch(error => console.log(error));
+                }
+                else{
+                    axios.get('http://127.0.0.1:8000/employeesLists')
+                        .then(response => this.employees = response.data)
+                        .catch(error => console.log(error));
+                }
             },
             employeesRefresh(employees){
                 this.employees = employees.data;

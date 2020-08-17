@@ -14,8 +14,13 @@ class EmployeeController extends Controller
     public function index()
     {
         //
-        $employees = Employee::paginate(10);
-        return response()->json($employees);
+        if(request('words') !== ''){
+            $employees['data'] = Employee::where('e_card_id', 'like', '%' . request('words') . '%')->get();
+            return response()->json($employees);
+        }
+        else{
+            return $this->listRefresh();
+        }
     }
 
     /**

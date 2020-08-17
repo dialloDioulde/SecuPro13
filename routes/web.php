@@ -17,7 +17,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/employeesLists', 'EmployeeController@index');
+Route::get('/employeesLists/{words?}', 'EmployeeController@index');
 Route::post('/employeesLists', 'EmployeeController@store');
 Route::get('/employees/edit/{id}', 'EmployeeController@edit');
 Route::patch('/employees/edit/{id}', 'EmployeeController@update');
