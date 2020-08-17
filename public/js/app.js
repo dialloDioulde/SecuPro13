@@ -2274,6 +2274,15 @@ __webpack_require__.r(__webpack_exports__);
         return console.log(error);
       });
     },
+    deleteEmployee: function deleteEmployee(id) {
+      var _this4 = this;
+
+      axios["delete"]('http://127.0.0.1:8000/employees/' + id).then(function (response) {
+        return _this4.employees = response.data;
+      })["catch"](function (error) {
+        return console.log(error);
+      });
+    },
     employeesRefresh: function employeesRefresh(employees) {
       this.employees = employees.data;
     }
@@ -39472,6 +39481,11 @@ var render = function() {
                         type: "button",
                         "data-toggle": "modal",
                         "data-target": "#deleteModal"
+                      },
+                      on: {
+                        click: function($event) {
+                          return _vm.deleteEmployee(employee.id)
+                        }
                       }
                     },
                     [

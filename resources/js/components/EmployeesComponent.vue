@@ -32,7 +32,7 @@
                         EDITER
                     </button>
                     <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-danger ml-2" data-toggle="modal" data-target="#deleteModal">
+                    <button type="button" class="btn btn-danger ml-2" data-toggle="modal" data-target="#deleteModal" @click="deleteEmployee(employee.id)">
                         SUPPRIMER
                     </button>
                 </td>
@@ -74,6 +74,11 @@
                 axios.get('http://127.0.0.1:8000/employees/edit/' + id)
                     .then(response => this.employeesToEdit = response.data)
                     .catch(error => console.log(error));
+            },
+            deleteEmployee(id){
+                axios.delete('http://127.0.0.1:8000/employees/' + id)
+                .then(response => this.employees = response.data)
+                .catch(error => console.log(error));
             },
             employeesRefresh(employees){
                 this.employees = employees.data;

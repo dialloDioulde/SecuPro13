@@ -74,12 +74,13 @@ class EmployeeController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function update($id)
     {
         //
         $employees = Employee::find($id);
+
         $employees->e_card_id = request('e_card_id');
         $employees->e_last_name = request('e_last_name');
         $employees->e_first_name = request('e_first_name');
@@ -103,11 +104,20 @@ class EmployeeController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy($id)
     {
         //
+        $employees = Employee::find($id);
+
+        if ($employees->delete()){
+            return $this->listRefresh();
+        }
+        else{
+            return response()->json(['error' => 'La Suppression n\'a pas été prise en compte ! '], 425);
+        }
+
     }
 
     private function listRefresh()
