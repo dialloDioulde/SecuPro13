@@ -25,6 +25,7 @@ Vue.use(VueRouter);
 
 //Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('add-employee', require('./components/AddEmployeeComponent.vue').default);
+Vue.component('edit-employee', require('./components/EditEmployeeComponent.vue').default);
 Vue.component('pagination', require('laravel-vue-pagination'));
 
 import Home from './components/HomeComponent.vue';

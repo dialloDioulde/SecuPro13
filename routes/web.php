@@ -19,6 +19,7 @@ Route::get('/', function () {
 
 Route::get('/employeesLists', 'EmployeeController@index');
 Route::post('/employeesLists', 'EmployeeController@store');
+Route::get('/employees/edit/{id}', 'EmployeeController@edit');
 
 Auth::routes();
 

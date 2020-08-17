@@ -2042,6 +2042,120 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/EditEmployeeComponent.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/EditEmployeeComponent.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['employeesToEdit'],
+  data: function data() {
+    return {
+      e_card_id: '',
+      e_last_name: '',
+      e_first_name: '',
+      e_birthday_date: '',
+      e_city_of_birth: '',
+      e_number: '',
+      e_email: '',
+      e_city: '',
+      e_adress: '',
+      e_postal_code: '',
+      e_status: ''
+    };
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/EmployeesComponent.vue?vue&type=script&lang=js&":
 /*!*****************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/EmployeesComponent.vue?vue&type=script&lang=js& ***!
@@ -2093,10 +2207,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      employees: {}
+      employees: {},
+      employeesToEdit: {}
     };
   },
   created: function created() {
@@ -2115,6 +2240,15 @@ __webpack_require__.r(__webpack_exports__);
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
       axios.get('http://127.0.0.1:8000/employeesLists?page=' + page).then(function (response) {
         _this2.employees = response.data;
+      });
+    },
+    getEmployee: function getEmployee(id) {
+      var _this3 = this;
+
+      axios.get('http://127.0.0.1:8000/employees/edit/' + id).then(function (response) {
+        return _this3.employeesToEdit = response.data;
+      })["catch"](function (error) {
+        return console.log(error);
       });
     },
     employeesRefresh: function employeesRefresh(employees) {
@@ -38334,7 +38468,7 @@ var render = function() {
         attrs: {
           type: "button",
           "data-toggle": "modal",
-          "data-target": "#exampleModal"
+          "data-target": "#addModal"
         }
       },
       [_vm._v("\n        Ajouté Un Employé\n    ")]
@@ -38345,7 +38479,7 @@ var render = function() {
       {
         staticClass: "modal fade",
         attrs: {
-          id: "exampleModal",
+          id: "addModal",
           tabindex: "-1",
           "aria-labelledby": "exampleModalLabel",
           "aria-hidden": "true"
@@ -38361,7 +38495,7 @@ var render = function() {
                 _c("div", { staticClass: "form-row" }, [
                   _c("div", { staticClass: "form-group col-md-12" }, [
                     _c("label", { attrs: { for: "e_card_id" } }, [
-                      _vm._v("Numéro Autorisation")
+                      _vm._v("Numéro d'Autorisation")
                     ]),
                     _vm._v(" "),
                     _c("input", {
@@ -38374,7 +38508,11 @@ var render = function() {
                         }
                       ],
                       staticClass: "form-control",
-                      attrs: { type: "text", id: "e_card_id" },
+                      attrs: {
+                        type: "text",
+                        name: "e_card_id",
+                        id: "e_card_id"
+                      },
                       domProps: { value: _vm.e_card_id },
                       on: {
                         input: function($event) {
@@ -38404,7 +38542,11 @@ var render = function() {
                         }
                       ],
                       staticClass: "form-control",
-                      attrs: { type: "text", id: "e_last_name" },
+                      attrs: {
+                        type: "text",
+                        name: "e_last_name",
+                        id: "e_last_name"
+                      },
                       domProps: { value: _vm.e_last_name },
                       on: {
                         input: function($event) {
@@ -38432,7 +38574,11 @@ var render = function() {
                         }
                       ],
                       staticClass: "form-control",
-                      attrs: { type: "text", id: "e_first_name" },
+                      attrs: {
+                        type: "text",
+                        name: "e_first_name",
+                        id: "e_first_name"
+                      },
                       domProps: { value: _vm.e_first_name },
                       on: {
                         input: function($event) {
@@ -38462,7 +38608,11 @@ var render = function() {
                         }
                       ],
                       staticClass: "form-control",
-                      attrs: { type: "text", id: "e_birthday_date" },
+                      attrs: {
+                        type: "text",
+                        name: "e_birthday_date",
+                        id: "e_birthday_date"
+                      },
                       domProps: { value: _vm.e_birthday_date },
                       on: {
                         input: function($event) {
@@ -38490,7 +38640,11 @@ var render = function() {
                         }
                       ],
                       staticClass: "form-control",
-                      attrs: { type: "text", id: "e_city_of_birth" },
+                      attrs: {
+                        type: "text",
+                        name: "e_city_of_birth",
+                        id: "e_city_of_birth"
+                      },
                       domProps: { value: _vm.e_city_of_birth },
                       on: {
                         input: function($event) {
@@ -38520,7 +38674,7 @@ var render = function() {
                         }
                       ],
                       staticClass: "form-control",
-                      attrs: { type: "text", id: "e_city" },
+                      attrs: { type: "text", name: "e_city", id: "e_city" },
                       domProps: { value: _vm.e_city },
                       on: {
                         input: function($event) {
@@ -38548,7 +38702,7 @@ var render = function() {
                         }
                       ],
                       staticClass: "form-control",
-                      attrs: { type: "text", id: "e_adress" },
+                      attrs: { type: "text", name: "e_adress", id: "e_adress" },
                       domProps: { value: _vm.e_adress },
                       on: {
                         input: function($event) {
@@ -38578,7 +38732,11 @@ var render = function() {
                         }
                       ],
                       staticClass: "form-control",
-                      attrs: { type: "text", id: "e_postal_code" },
+                      attrs: {
+                        type: "text",
+                        name: "e_postal_code",
+                        id: "e_postal_code"
+                      },
                       domProps: { value: _vm.e_postal_code },
                       on: {
                         input: function($event) {
@@ -38606,7 +38764,7 @@ var render = function() {
                         }
                       ],
                       staticClass: "form-control",
-                      attrs: { type: "email", id: "e_email" },
+                      attrs: { type: "email", name: "e_email", id: "e_email" },
                       domProps: { value: _vm.e_email },
                       on: {
                         input: function($event) {
@@ -38636,7 +38794,7 @@ var render = function() {
                         }
                       ],
                       staticClass: "form-control",
-                      attrs: { type: "text", id: "e_status" },
+                      attrs: { type: "text", name: "e_status", id: "e_status" },
                       domProps: { value: _vm.e_status },
                       on: {
                         input: function($event) {
@@ -38664,7 +38822,7 @@ var render = function() {
                         }
                       ],
                       staticClass: "form-control",
-                      attrs: { type: "text", id: "e_number" },
+                      attrs: { type: "text", name: "e_number", id: "e_number" },
                       domProps: { value: _vm.e_number },
                       on: {
                         input: function($event) {
@@ -38712,10 +38870,472 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "modal-header" }, [
+      _c("h5", { staticClass: "modal-title", attrs: { id: "addModalLabel" } }, [
+        _vm._v("INSCRIPTION AGENT")
+      ]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/EditEmployeeComponent.vue?vue&type=template&id=437e152a&":
+/*!************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/EditEmployeeComponent.vue?vue&type=template&id=437e152a& ***!
+  \************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "editModal",
+          tabindex: "-1",
+          "aria-labelledby": "exampleModalLabel",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c("div", { staticClass: "modal-dialog modal-xl" }, [
+          _c("div", { staticClass: "modal-content" }, [
+            _vm._m(0),
+            _vm._v(" "),
+            _c("div", { staticClass: "modal-body" }, [
+              _c("form", [
+                _c("div", { staticClass: "form-row" }, [
+                  _c("div", { staticClass: "form-group col-md-12" }, [
+                    _c("label", { attrs: { for: "e_card_id" } }, [
+                      _vm._v("Numéro d'Autorisation")
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.employeesToEdit.e_card_id,
+                          expression: "employeesToEdit.e_card_id"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "text",
+                        name: "e_card_id",
+                        id: "e_card_id"
+                      },
+                      domProps: { value: _vm.employeesToEdit.e_card_id },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(
+                            _vm.employeesToEdit,
+                            "e_card_id",
+                            $event.target.value
+                          )
+                        }
+                      }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-row" }, [
+                  _c("div", { staticClass: "form-group col-md-6" }, [
+                    _c("label", { attrs: { for: "e_last_name" } }, [
+                      _vm._v("Nom")
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.employeesToEdit.e_last_name,
+                          expression: "employeesToEdit.e_last_name"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "text",
+                        name: "e_last_name",
+                        id: "e_last_name"
+                      },
+                      domProps: { value: _vm.employeesToEdit.e_last_name },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(
+                            _vm.employeesToEdit,
+                            "e_last_name",
+                            $event.target.value
+                          )
+                        }
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group col-md-6" }, [
+                    _c("label", { attrs: { for: "e_first_name" } }, [
+                      _vm._v("Prénom")
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.employeesToEdit.e_first_name,
+                          expression: "employeesToEdit.e_first_name"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "text",
+                        name: "e_first_name",
+                        id: "e_first_name"
+                      },
+                      domProps: { value: _vm.employeesToEdit.e_first_name },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(
+                            _vm.employeesToEdit,
+                            "e_first_name",
+                            $event.target.value
+                          )
+                        }
+                      }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-row" }, [
+                  _c("div", { staticClass: "form-group col-md-6" }, [
+                    _c("label", { attrs: { for: "e_birthday_date" } }, [
+                      _vm._v("Date De Naissance")
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.employeesToEdit.e_birthday_date,
+                          expression: "employeesToEdit.e_birthday_date"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "text",
+                        name: "e_birthday_date",
+                        id: "e_birthday_date"
+                      },
+                      domProps: { value: _vm.employeesToEdit.e_birthday_date },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(
+                            _vm.employeesToEdit,
+                            "e_birthday_date",
+                            $event.target.value
+                          )
+                        }
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group col-md-6" }, [
+                    _c("label", { attrs: { for: "e_city_of_birth" } }, [
+                      _vm._v("Ville De Naissance")
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.employeesToEdit.e_city_of_birth,
+                          expression: "employeesToEdit.e_city_of_birth"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "text",
+                        name: "e_city_of_birth",
+                        id: "e_city_of_birth"
+                      },
+                      domProps: { value: _vm.employeesToEdit.e_city_of_birth },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(
+                            _vm.employeesToEdit,
+                            "e_city_of_birth",
+                            $event.target.value
+                          )
+                        }
+                      }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-row" }, [
+                  _c("div", { staticClass: "form-group col-md-6" }, [
+                    _c("label", { attrs: { for: "e_city" } }, [
+                      _vm._v("Ville De Résidence")
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.employeesToEdit.e_city,
+                          expression: "employeesToEdit.e_city"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: { type: "text", name: "e_city", id: "e_city" },
+                      domProps: { value: _vm.employeesToEdit.e_city },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(
+                            _vm.employeesToEdit,
+                            "e_city",
+                            $event.target.value
+                          )
+                        }
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group col-md-6" }, [
+                    _c("label", { attrs: { for: "e_adress" } }, [
+                      _vm._v("Adresse")
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.employeesToEdit.e_adress,
+                          expression: "employeesToEdit.e_adress"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: { type: "text", name: "e_adress", id: "e_adress" },
+                      domProps: { value: _vm.employeesToEdit.e_adress },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(
+                            _vm.employeesToEdit,
+                            "e_adress",
+                            $event.target.value
+                          )
+                        }
+                      }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-row" }, [
+                  _c("div", { staticClass: "form-group col-md-6" }, [
+                    _c("label", { attrs: { for: "e_postal_code" } }, [
+                      _vm._v("Code Postal")
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.employeesToEdit.e_postal_code,
+                          expression: "employeesToEdit.e_postal_code"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "text",
+                        name: "e_postal_code",
+                        id: "e_postal_code"
+                      },
+                      domProps: { value: _vm.employeesToEdit.e_postal_code },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(
+                            _vm.employeesToEdit,
+                            "e_postal_code",
+                            $event.target.value
+                          )
+                        }
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group col-md-6" }, [
+                    _c("label", { attrs: { for: "e_email" } }, [
+                      _vm._v("Email")
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.employeesToEdit.e_email,
+                          expression: "employeesToEdit.e_email"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: { type: "email", name: "e_email", id: "e_email" },
+                      domProps: { value: _vm.employeesToEdit.e_email },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(
+                            _vm.employeesToEdit,
+                            "e_email",
+                            $event.target.value
+                          )
+                        }
+                      }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-row" }, [
+                  _c("div", { staticClass: "form-group col-md-6" }, [
+                    _c("label", { attrs: { for: "e_status" } }, [
+                      _vm._v("Statut")
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.employeesToEdit.e_status,
+                          expression: "employeesToEdit.e_status"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: { type: "text", name: "e_status", id: "e_status" },
+                      domProps: { value: _vm.employeesToEdit.e_status },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(
+                            _vm.employeesToEdit,
+                            "e_status",
+                            $event.target.value
+                          )
+                        }
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group col-md-6" }, [
+                    _c("label", { attrs: { for: "e_number" } }, [
+                      _vm._v("Numéro Tel")
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.employeesToEdit.e_number,
+                          expression: "employeesToEdit.e_number"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: { type: "text", name: "e_number", id: "e_number" },
+                      domProps: { value: _vm.employeesToEdit.e_number },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(
+                            _vm.employeesToEdit,
+                            "e_number",
+                            $event.target.value
+                          )
+                        }
+                      }
+                    })
+                  ])
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _vm._m(1)
+          ])
+        ])
+      ]
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
       _c(
         "h5",
-        { staticClass: "modal-title", attrs: { id: "exampleModalLabel" } },
-        [_vm._v("INSCRIPTION AGENT")]
+        { staticClass: "modal-title", attrs: { id: "editModalLabel" } },
+        [_vm._v("ÉDITION DES INFORMATIONS DE L'AGENT DIALLO")]
       ),
       _vm._v(" "),
       _c(
@@ -38729,6 +39349,27 @@ var staticRenderFns = [
           }
         },
         [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-footer" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-secondary",
+          attrs: { type: "button", "data-dismiss": "modal" }
+        },
+        [_vm._v("ANNULER")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        { staticClass: "btn btn-success", attrs: { type: "button" } },
+        [_vm._v("Mettre à Jour")]
       )
     ])
   }
@@ -38781,7 +39422,44 @@ var render = function() {
                 _vm._v(" "),
                 _c("td", [_vm._v(_vm._s(employee.e_city))]),
                 _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(employee.e_status))])
+                _c("td", [_vm._v(_vm._s(employee.e_status))]),
+                _vm._v(" "),
+                _c("td", { staticClass: "d-flex" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-warning ",
+                      attrs: {
+                        type: "button",
+                        "data-toggle": "modal",
+                        "data-target": "#editModal"
+                      },
+                      on: {
+                        click: function($event) {
+                          return _vm.getEmployee(employee.id)
+                        }
+                      }
+                    },
+                    [_vm._v("\n                    EDITER\n                ")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-danger ml-2",
+                      attrs: {
+                        type: "button",
+                        "data-toggle": "modal",
+                        "data-target": "#deleteModal"
+                      }
+                    },
+                    [
+                      _vm._v(
+                        "\n                    SUPPRIMER\n                "
+                      )
+                    ]
+                  )
+                ])
               ])
             ])
           }),
@@ -38793,7 +39471,9 @@ var render = function() {
           })
         ],
         2
-      )
+      ),
+      _vm._v(" "),
+      _c("edit-employee", { attrs: { employeesToEdit: _vm.employeesToEdit } })
     ],
     1
   )
@@ -38807,7 +39487,7 @@ var staticRenderFns = [
       _c("tr", { staticStyle: { "font-size": "16px" } }, [
         _c("th", { attrs: { scope: "row" } }, [_vm._v("ID")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("CARTE PRO")]),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("AUTO")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("NOM")]),
         _vm._v(" "),
@@ -38817,7 +39497,9 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("VILLE")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("STATUT")])
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("STATUT")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("ACTIONS")])
       ])
     ])
   }
@@ -54116,6 +54798,7 @@ Vue.use(vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]);
 //Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 
 Vue.component('add-employee', __webpack_require__(/*! ./components/AddEmployeeComponent.vue */ "./resources/js/components/AddEmployeeComponent.vue")["default"]);
+Vue.component('edit-employee', __webpack_require__(/*! ./components/EditEmployeeComponent.vue */ "./resources/js/components/EditEmployeeComponent.vue")["default"]);
 Vue.component('pagination', __webpack_require__(/*! laravel-vue-pagination */ "./node_modules/laravel-vue-pagination/dist/laravel-vue-pagination.common.js"));
 
 
@@ -54251,6 +54934,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddEmployeeComponent_vue_vue_type_template_id_27171139___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddEmployeeComponent_vue_vue_type_template_id_27171139___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/EditEmployeeComponent.vue":
+/*!***********************************************************!*\
+  !*** ./resources/js/components/EditEmployeeComponent.vue ***!
+  \***********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _EditEmployeeComponent_vue_vue_type_template_id_437e152a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./EditEmployeeComponent.vue?vue&type=template&id=437e152a& */ "./resources/js/components/EditEmployeeComponent.vue?vue&type=template&id=437e152a&");
+/* harmony import */ var _EditEmployeeComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./EditEmployeeComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/EditEmployeeComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _EditEmployeeComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _EditEmployeeComponent_vue_vue_type_template_id_437e152a___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _EditEmployeeComponent_vue_vue_type_template_id_437e152a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/EditEmployeeComponent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/EditEmployeeComponent.vue?vue&type=script&lang=js&":
+/*!************************************************************************************!*\
+  !*** ./resources/js/components/EditEmployeeComponent.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_EditEmployeeComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./EditEmployeeComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/EditEmployeeComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_EditEmployeeComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/EditEmployeeComponent.vue?vue&type=template&id=437e152a&":
+/*!******************************************************************************************!*\
+  !*** ./resources/js/components/EditEmployeeComponent.vue?vue&type=template&id=437e152a& ***!
+  \******************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EditEmployeeComponent_vue_vue_type_template_id_437e152a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./EditEmployeeComponent.vue?vue&type=template&id=437e152a& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/EditEmployeeComponent.vue?vue&type=template&id=437e152a&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EditEmployeeComponent_vue_vue_type_template_id_437e152a___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EditEmployeeComponent_vue_vue_type_template_id_437e152a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
