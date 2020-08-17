@@ -1996,6 +1996,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2009,13 +2020,15 @@ __webpack_require__.r(__webpack_exports__);
       e_city: '',
       e_adress: '',
       e_postal_code: '',
-      e_status: ''
+      e_status: '',
+      errors: []
     };
   },
   methods: {
     addEmployee: function addEmployee() {
       var _this = this;
 
+      this.errors = [];
       axios.post('http://127.0.0.1:8000/employeesLists', {
         e_card_id: this.e_card_id,
         e_last_name: this.e_last_name,
@@ -2029,9 +2042,23 @@ __webpack_require__.r(__webpack_exports__);
         e_postal_code: this.e_postal_code,
         e_status: this.e_status
       }).then(function (response) {
-        return _this.$emit('employee-added', response);
+        _this.$emit('employee-added', response);
+
+        _this.e_card_id = '';
+        _this.e_last_name = '';
+        _this.e_first_name = '';
+        _this.e_birthday_date = '';
+        _this.e_city_of_birth = '';
+        _this.e_number = '';
+        _this.e_email = '';
+        _this.e_city = '';
+        _this.e_adress = '';
+        _this.e_postal_code = '';
+        _this.e_status = '';
       })["catch"](function (error) {
-        return console.log(error);
+        if (error.response.status === 422) {
+          _this.errors = error.response.data.errors;
+        }
       });
     }
   },
@@ -2314,23 +2341,6 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (error) {
         return console.log(error);
       });
-    },
-    employeesSerach: function employeesSerach() {
-      var _this5 = this;
-
-      if (this.words.length !== 0) {
-        axios.get('http://127.0.0.1:8000/employeesLists/' + this.words).then(function (response) {
-          return _this5.employees = response.data;
-        })["catch"](function (error) {
-          return console.log(error);
-        });
-      } else {
-        axios.get('http://127.0.0.1:8000/employeesLists').then(function (response) {
-          return _this5.employees = response.data;
-        })["catch"](function (error) {
-          return console.log(error);
-        });
-      }
     },
     employeesRefresh: function employeesRefresh(employees) {
       this.employees = employees.data;
@@ -38603,7 +38613,13 @@ var render = function() {
                           _vm.e_card_id = $event.target.value
                         }
                       }
-                    })
+                    }),
+                    _vm._v(" "),
+                    _vm.errors.e_card_id
+                      ? _c("span", { staticClass: "error" }, [
+                          _vm._v(_vm._s(_vm.errors.e_card_id[0]))
+                        ])
+                      : _vm._e()
                   ])
                 ]),
                 _vm._v(" "),
@@ -38637,7 +38653,13 @@ var render = function() {
                           _vm.e_last_name = $event.target.value
                         }
                       }
-                    })
+                    }),
+                    _vm._v(" "),
+                    _vm.errors.e_last_name
+                      ? _c("span", { staticClass: "error" }, [
+                          _vm._v(_vm._s(_vm.errors.e_last_name[0]))
+                        ])
+                      : _vm._e()
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "form-group col-md-6" }, [
@@ -38669,7 +38691,13 @@ var render = function() {
                           _vm.e_first_name = $event.target.value
                         }
                       }
-                    })
+                    }),
+                    _vm._v(" "),
+                    _vm.errors.e_first_name
+                      ? _c("span", { staticClass: "error" }, [
+                          _vm._v(_vm._s(_vm.errors.e_first_name[0]))
+                        ])
+                      : _vm._e()
                   ])
                 ]),
                 _vm._v(" "),
@@ -38703,7 +38731,13 @@ var render = function() {
                           _vm.e_birthday_date = $event.target.value
                         }
                       }
-                    })
+                    }),
+                    _vm._v(" "),
+                    _vm.errors.e_birthday_date
+                      ? _c("span", { staticClass: "error" }, [
+                          _vm._v(_vm._s(_vm.errors.e_birthday_date[0]))
+                        ])
+                      : _vm._e()
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "form-group col-md-6" }, [
@@ -38735,7 +38769,13 @@ var render = function() {
                           _vm.e_city_of_birth = $event.target.value
                         }
                       }
-                    })
+                    }),
+                    _vm._v(" "),
+                    _vm.errors.e_city_of_birth
+                      ? _c("span", { staticClass: "error" }, [
+                          _vm._v(_vm._s(_vm.errors.e_city_of_birth[0]))
+                        ])
+                      : _vm._e()
                   ])
                 ]),
                 _vm._v(" "),
@@ -38765,7 +38805,13 @@ var render = function() {
                           _vm.e_city = $event.target.value
                         }
                       }
-                    })
+                    }),
+                    _vm._v(" "),
+                    _vm.errors.e_city
+                      ? _c("span", { staticClass: "error" }, [
+                          _vm._v(_vm._s(_vm.errors.e_city[0]))
+                        ])
+                      : _vm._e()
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "form-group col-md-6" }, [
@@ -38793,7 +38839,13 @@ var render = function() {
                           _vm.e_adress = $event.target.value
                         }
                       }
-                    })
+                    }),
+                    _vm._v(" "),
+                    _vm.errors.e_adress
+                      ? _c("span", { staticClass: "error" }, [
+                          _vm._v(_vm._s(_vm.errors.e_adress[0]))
+                        ])
+                      : _vm._e()
                   ])
                 ]),
                 _vm._v(" "),
@@ -38827,7 +38879,13 @@ var render = function() {
                           _vm.e_postal_code = $event.target.value
                         }
                       }
-                    })
+                    }),
+                    _vm._v(" "),
+                    _vm.errors.e_postal_code
+                      ? _c("span", { staticClass: "error" }, [
+                          _vm._v(_vm._s(_vm.errors.e_postal_code[0]))
+                        ])
+                      : _vm._e()
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "form-group col-md-6" }, [
@@ -38855,7 +38913,13 @@ var render = function() {
                           _vm.e_email = $event.target.value
                         }
                       }
-                    })
+                    }),
+                    _vm._v(" "),
+                    _vm.errors.e_email
+                      ? _c("span", { staticClass: "error" }, [
+                          _vm._v(_vm._s(_vm.errors.e_email[0]))
+                        ])
+                      : _vm._e()
                   ])
                 ]),
                 _vm._v(" "),
@@ -38885,7 +38949,13 @@ var render = function() {
                           _vm.e_status = $event.target.value
                         }
                       }
-                    })
+                    }),
+                    _vm._v(" "),
+                    _vm.errors.e_status
+                      ? _c("span", { staticClass: "error" }, [
+                          _vm._v(_vm._s(_vm.errors.e_status[0]))
+                        ])
+                      : _vm._e()
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "form-group col-md-6" }, [
@@ -38913,7 +38983,13 @@ var render = function() {
                           _vm.e_number = $event.target.value
                         }
                       }
-                    })
+                    }),
+                    _vm._v(" "),
+                    _vm.errors.e_number
+                      ? _c("span", { staticClass: "error" }, [
+                          _vm._v(_vm._s(_vm.errors.e_number[0]))
+                        ])
+                      : _vm._e()
                   ])
                 ])
               ])
@@ -38933,7 +39009,7 @@ var render = function() {
                 "button",
                 {
                   staticClass: "btn btn-success",
-                  attrs: { type: "button", "data-dismiss": "modal" },
+                  attrs: { type: "button" },
                   on: { click: _vm.addEmployee }
                 },
                 [_vm._v("INSCRIRE")]
@@ -38950,7 +39026,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-header bg-success" }, [
+    return _c("div", { staticClass: "modal-header bg-info" }, [
       _c(
         "h5",
         {
@@ -39489,7 +39565,7 @@ var render = function() {
     { staticClass: "container-fluid" },
     [
       _c("div", { staticClass: "form-row" }, [
-        _c("div", { staticClass: "col-row" }, [
+        _c("div", { staticClass: "col-row col-md-12" }, [
           _c("input", {
             directives: [
               {
@@ -39499,11 +39575,10 @@ var render = function() {
                 expression: "words"
               }
             ],
-            staticClass: "form-control",
+            staticClass: "form-control ml-3 mt-3",
             attrs: { type: "text", placeholder: "Rechercher..." },
             domProps: { value: _vm.words },
             on: {
-              keyup: _vm.employeesSerach,
               input: function($event) {
                 if ($event.target.composing) {
                   return
@@ -39634,7 +39709,7 @@ var render = function() {
           }),
           _vm._v(" "),
           _c("pagination", {
-            staticClass: "mt-5",
+            staticClass: "mt-2",
             attrs: { data: _vm.employees },
             on: { "pagination-change-page": _vm.getResults }
           })

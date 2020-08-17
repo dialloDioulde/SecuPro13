@@ -14,13 +14,7 @@ class EmployeeController extends Controller
     public function index()
     {
         //
-        if(request('words') !== ''){
-            $employees['data'] = Employee::where('e_card_id', 'like', '%' . request('words') . '%')->get();
-            return response()->json($employees);
-        }
-        else{
-            return $this->listRefresh();
-        }
+        return $this->listRefresh();
     }
 
     /**
@@ -42,6 +36,22 @@ class EmployeeController extends Controller
     public function store(Request $request)
     {
         //
+        // Validation des données
+        $this->validate($request, [
+            'e_card_id' => 'required|unique:employees',
+            'e_last_name' => 'required',
+            'e_first_name' => 'required',
+            'e_birthday_date' => 'required',
+            'e_city_of_birth' => 'required',
+            'e_number' => 'required',
+            'e_email' => 'required|email|unique:employees',
+            'e_city' => 'required',
+            'e_adress' => 'required',
+            'e_postal_code' => 'required',
+            'e_status' => 'required',
+        ]);
+
+
         $employees = Employee::create($request->all());
 
         if ($employees){
@@ -127,9 +137,18 @@ class EmployeeController extends Controller
 
     private function listRefresh()
     {
-        $employees = Employee::paginate(10);
+        $employees = Employee::paginate(8);
 
             return response()->json($employees);
 
     }
+
+    public function employeesSearch(){
+        //
+        if(request('words') !== ''){
+            $employees['data'] = Employee::where('e_card_id', 'like', '%' . request('words') . '%')->get();
+            return response()->json($employees);
+        }
+    }
+
 }

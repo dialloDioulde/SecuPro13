@@ -2,8 +2,8 @@
     <div class="container-fluid">
 
         <div class="form-row">
-            <div class="col-row">
-                <input type="text" class="form-control" @keyup="employeesSerach" v-model="words" placeholder="Rechercher...">
+            <div class="col-row col-md-12">
+                <input type="text" class="form-control ml-3 mt-3" v-model="words" placeholder="Rechercher...">
             </div>
         </div>
 
@@ -70,7 +70,7 @@
 
             </tr>
             </tbody>
-            <pagination :data="employees" @pagination-change-page="getResults" class="mt-5"></pagination>
+            <pagination :data="employees" @pagination-change-page="getResults" class="mt-2"></pagination>
 
         </table>
         <edit-employee v-bind:employeesToEdit="employeesToEdit" @employee-update="employeesRefresh"></edit-employee>
@@ -111,18 +111,6 @@
                 axios.delete('http://127.0.0.1:8000/employees/' + id)
                 .then(response => this.employees = response.data)
                 .catch(error => console.log(error));
-            },
-            employeesSerach(){
-                if(this.words.length !== 0){
-                    axios.get('http://127.0.0.1:8000/employeesLists/' + this.words)
-                    .then(response => this.employees = response.data)
-                    .catch(error => console.log(error));
-                }
-                else{
-                    axios.get('http://127.0.0.1:8000/employeesLists')
-                        .then(response => this.employees = response.data)
-                        .catch(error => console.log(error));
-                }
             },
             employeesRefresh(employees){
                 this.employees = employees.data;
