@@ -40,9 +40,7 @@ class EmployeeController extends Controller
         $employees = Employee::create($request->all());
 
         if ($employees){
-            $employees = Employee::paginate(10);
-
-            return response()->json($employees);
+            return $this->listRefresh();
         }
     }
 
@@ -78,9 +76,27 @@ class EmployeeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update($id)
     {
         //
+        $employees = Employee::find($id);
+        $employees->e_card_id = request('e_card_id');
+        $employees->e_last_name = request('e_last_name');
+        $employees->e_first_name = request('e_first_name');
+        $employees->e_birthday_date = request('e_birthday_date');
+        $employees->e_city_of_birth = request('e_city_of_birth');
+        $employees->e_number = request('e_number');
+        $employees->e_email = request('e_email');
+        $employees->e_city = request('e_city');
+        $employees->e_adress = request('e_adress');
+        $employees->e_postal_code = request('e_postal_code');
+        $employees->e_status = request('e_status');
+
+        $employees->save();
+
+        if($employees){
+            return $this->listRefresh();
+        }
     }
 
     /**
@@ -92,5 +108,13 @@ class EmployeeController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    private function listRefresh()
+    {
+        $employees = Employee::paginate(10);
+
+            return response()->json($employees);
+
     }
 }

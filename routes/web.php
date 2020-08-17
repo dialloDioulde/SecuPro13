@@ -20,6 +20,7 @@ Route::get('/', function () {
 Route::get('/employeesLists', 'EmployeeController@index');
 Route::post('/employeesLists', 'EmployeeController@store');
 Route::get('/employees/edit/{id}', 'EmployeeController@edit');
+Route::patch('/employees/edit/{id}', 'EmployeeController@update');
 
 Auth::routes();
 

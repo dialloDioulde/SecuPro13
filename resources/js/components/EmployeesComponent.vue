@@ -42,7 +42,7 @@
             <pagination :data="employees" @pagination-change-page="getResults" class="mt-5"></pagination>
 
         </table>
-        <edit-employee v-bind:employeesToEdit="employeesToEdit"></edit-employee>
+        <edit-employee v-bind:employeesToEdit="employeesToEdit" @employee-update="employeesRefresh"></edit-employee>
     </div>
 
 

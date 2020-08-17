@@ -73,7 +73,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">ANNULER</button>
-                        <button type="button" class="btn btn-success">Mettre à Jour</button>
+                        <button type="button" class="btn btn-success" @click="employeeUpdate" data-dismiss="modal">Mettre à Jour</button>
                     </div>
                 </div>
             </div>
@@ -99,6 +99,25 @@
                 e_postal_code: '',
                 e_status: '',
             }
+        },
+        methods:{
+            employeeUpdate(){
+                axios.patch('http://127.0.0.1:8000/employees/edit/' + this.employeesToEdit.id, {
+                    e_card_id: this.employeesToEdit.e_card_id,
+                    e_last_name: this.employeesToEdit.e_last_name,
+                    e_first_name: this.employeesToEdit.e_first_name,
+                    e_birthday_date: this.employeesToEdit.e_birthday_date,
+                    e_city_of_birth: this.employeesToEdit.e_city_of_birth,
+                    e_number: this.employeesToEdit.e_number,
+                    e_email: this.employeesToEdit.e_email,
+                    e_city: this.employeesToEdit.e_city,
+                    e_adress: this.employeesToEdit.e_adress,
+                    e_postal_code: this.employeesToEdit.e_postal_code,
+                    e_status: this.employeesToEdit.e_status,
+                })
+                .then(response => this.$emit('employee-update', response))
+                .catch(error => console.log(error));
+            },
         }
     }
 </script>
