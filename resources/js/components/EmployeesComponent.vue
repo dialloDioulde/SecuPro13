@@ -3,7 +3,7 @@
 
         <div class="form-row">
             <div class="col-row col-md-12">
-                <input type="text" class="form-control ml-3 mt-3" v-model="words" placeholder="Rechercher...">
+                <input type="text" class="form-control ml-3 mt-3" placeholder="Rechercher...">
             </div>
         </div>
 
@@ -87,7 +87,6 @@
             return {
                 employees: {},
                 employeesToEdit: {},
-                words: '',
             }
         },
         created() {

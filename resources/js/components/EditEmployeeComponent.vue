@@ -16,26 +16,31 @@
                                 <div class="form-group col-md-12">
                                     <label for="e_card_id">Numéro d'Autorisation</label>
                                     <input type="text" name="e_card_id" class="form-control" id="e_card_id" v-model="employeesToEdit.e_card_id">
+                                    <span v-if="errors.e_card_id" class="error text-danger">{{errors.e_card_id[0]}}</span>
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="e_last_name">Nom</label>
                                     <input type="text" name="e_last_name" class="form-control" id="e_last_name" v-model="employeesToEdit.e_last_name">
+                                    <span v-if="errors.e_last_name" class="error text-danger">{{errors.e_last_name[0]}}</span>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="e_first_name">Prénom</label>
                                     <input type="text" name="e_first_name" class="form-control" id="e_first_name" v-model="employeesToEdit.e_first_name">
+                                    <span v-if="errors.e_first_name" class="error text-danger">{{errors.e_first_name[0]}}</span>
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="e_birthday_date">Date De Naissance</label>
                                     <input type="text" name="e_birthday_date" class="form-control" id="e_birthday_date" v-model="employeesToEdit.e_birthday_date">
+                                    <span v-if="errors.e_birthday_date" class="error text-danger">{{errors.e_birthday_date[0]}}</span>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="e_city_of_birth">Ville De Naissance</label>
                                     <input type="text" name="e_city_of_birth" class="form-control" id="e_city_of_birth" v-model="employeesToEdit.e_city_of_birth">
+                                    <span v-if="errors.e_city_of_birth" class="error text-danger">{{errors.e_city_of_birth[0]}}</span>
                                 </div>
                             </div>
 
@@ -43,37 +48,43 @@
                                 <div class="form-group col-md-6">
                                     <label for="e_city">Ville De Résidence</label>
                                     <input type="text" name="e_city" class="form-control" id="e_city" v-model="employeesToEdit.e_city">
+                                    <span v-if="errors.e_city" class="error text-danger">{{errors.e_city[0]}}</span>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="e_adress">Adresse</label>
                                     <input type="text" name="e_adress" class="form-control" id="e_adress" v-model="employeesToEdit.e_adress">
+                                    <span v-if="errors.e_adress" class="error text-danger">{{errors.e_adress[0]}}</span>
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="e_postal_code">Code Postal</label>
                                     <input type="text" name="e_postal_code" class="form-control" id="e_postal_code" v-model="employeesToEdit.e_postal_code">
+                                    <span v-if="errors.e_postal_code" class="error text-danger">{{errors.e_postal_code[0]}}</span>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="e_email">Email</label>
                                     <input type="email" name="e_email" class="form-control" id="e_email" v-model="employeesToEdit.e_email">
+                                    <span v-if="errors.e_email" class="error text-danger">{{errors.e_email[0]}}</span>
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="e_status">Statut</label>
                                     <input type="text" name="e_status" class="form-control" id="e_status" v-model="employeesToEdit.e_status">
+                                    <span v-if="errors.e_status" class="error text-danger">{{errors.e_status[0]}}</span>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="e_number">Numéro Tel</label>
                                     <input type="text" name="e_number" class="form-control" id="e_number" v-model="employeesToEdit.e_number">
+                                    <span v-if="errors.e_number" class="error text-danger">{{errors.e_number[0]}}</span>
                                 </div>
                             </div>
                         </form>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">ANNULER</button>
-                        <button type="button" class="btn btn-success" @click="employeeUpdate" data-dismiss="modal">Mettre à Jour</button>
+                        <button type="button" class="btn btn-success" @click="employeeUpdate">Mettre à Jour</button>
                     </div>
                 </div>
             </div>
@@ -98,10 +109,12 @@
                 e_adress: '',
                 e_postal_code: '',
                 e_status: '',
+                errors: [],
             }
         },
         methods:{
             employeeUpdate(){
+                this.errors = [];
                 axios.patch('http://127.0.0.1:8000/employees/edit/' + this.employeesToEdit.id, {
                     e_card_id: this.employeesToEdit.e_card_id,
                     e_last_name: this.employeesToEdit.e_last_name,
@@ -115,8 +128,15 @@
                     e_postal_code: this.employeesToEdit.e_postal_code,
                     e_status: this.employeesToEdit.e_status,
                 })
-                .then(response => this.$emit('employee-update', response))
-                .catch(error => console.log(error));
+                .then(response => {
+                    this.$emit('employee-update', response);
+                    window.location.reload(true);
+                })
+                .catch(error => {
+                    if (error.response.status === 422){
+                        this.errors = error.response.data.errors;
+                    }
+                });
             },
         }
     }

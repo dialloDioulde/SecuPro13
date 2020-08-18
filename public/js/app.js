@@ -2055,6 +2055,7 @@ __webpack_require__.r(__webpack_exports__);
         _this.e_adress = '';
         _this.e_postal_code = '';
         _this.e_status = '';
+        window.location.reload(true);
       })["catch"](function (error) {
         if (error.response.status === 422) {
           _this.errors = error.response.data.errors;
@@ -2162,6 +2163,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['employeesToEdit'],
   data: function data() {
@@ -2176,13 +2188,15 @@ __webpack_require__.r(__webpack_exports__);
       e_city: '',
       e_adress: '',
       e_postal_code: '',
-      e_status: ''
+      e_status: '',
+      errors: []
     };
   },
   methods: {
     employeeUpdate: function employeeUpdate() {
       var _this = this;
 
+      this.errors = [];
       axios.patch('http://127.0.0.1:8000/employees/edit/' + this.employeesToEdit.id, {
         e_card_id: this.employeesToEdit.e_card_id,
         e_last_name: this.employeesToEdit.e_last_name,
@@ -2196,9 +2210,13 @@ __webpack_require__.r(__webpack_exports__);
         e_postal_code: this.employeesToEdit.e_postal_code,
         e_status: this.employeesToEdit.e_status
       }).then(function (response) {
-        return _this.$emit('employee-update', response);
+        _this.$emit('employee-update', response);
+
+        window.location.reload(true);
       })["catch"](function (error) {
-        return console.log(error);
+        if (error.response.status === 422) {
+          _this.errors = error.response.data.errors;
+        }
       });
     }
   }
@@ -2302,8 +2320,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       employees: {},
-      employeesToEdit: {},
-      words: ''
+      employeesToEdit: {}
     };
   },
   created: function created() {
@@ -38616,7 +38633,7 @@ var render = function() {
                     }),
                     _vm._v(" "),
                     _vm.errors.e_card_id
-                      ? _c("span", { staticClass: "error" }, [
+                      ? _c("span", { staticClass: "error text-danger" }, [
                           _vm._v(_vm._s(_vm.errors.e_card_id[0]))
                         ])
                       : _vm._e()
@@ -38656,7 +38673,7 @@ var render = function() {
                     }),
                     _vm._v(" "),
                     _vm.errors.e_last_name
-                      ? _c("span", { staticClass: "error" }, [
+                      ? _c("span", { staticClass: "error text-danger" }, [
                           _vm._v(_vm._s(_vm.errors.e_last_name[0]))
                         ])
                       : _vm._e()
@@ -38694,7 +38711,7 @@ var render = function() {
                     }),
                     _vm._v(" "),
                     _vm.errors.e_first_name
-                      ? _c("span", { staticClass: "error" }, [
+                      ? _c("span", { staticClass: "error text-danger" }, [
                           _vm._v(_vm._s(_vm.errors.e_first_name[0]))
                         ])
                       : _vm._e()
@@ -38734,7 +38751,7 @@ var render = function() {
                     }),
                     _vm._v(" "),
                     _vm.errors.e_birthday_date
-                      ? _c("span", { staticClass: "error" }, [
+                      ? _c("span", { staticClass: "error text-danger" }, [
                           _vm._v(_vm._s(_vm.errors.e_birthday_date[0]))
                         ])
                       : _vm._e()
@@ -38772,7 +38789,7 @@ var render = function() {
                     }),
                     _vm._v(" "),
                     _vm.errors.e_city_of_birth
-                      ? _c("span", { staticClass: "error" }, [
+                      ? _c("span", { staticClass: "error text-danger" }, [
                           _vm._v(_vm._s(_vm.errors.e_city_of_birth[0]))
                         ])
                       : _vm._e()
@@ -38808,7 +38825,7 @@ var render = function() {
                     }),
                     _vm._v(" "),
                     _vm.errors.e_city
-                      ? _c("span", { staticClass: "error" }, [
+                      ? _c("span", { staticClass: "error text-danger" }, [
                           _vm._v(_vm._s(_vm.errors.e_city[0]))
                         ])
                       : _vm._e()
@@ -38842,7 +38859,7 @@ var render = function() {
                     }),
                     _vm._v(" "),
                     _vm.errors.e_adress
-                      ? _c("span", { staticClass: "error" }, [
+                      ? _c("span", { staticClass: "error text-danger" }, [
                           _vm._v(_vm._s(_vm.errors.e_adress[0]))
                         ])
                       : _vm._e()
@@ -38882,7 +38899,7 @@ var render = function() {
                     }),
                     _vm._v(" "),
                     _vm.errors.e_postal_code
-                      ? _c("span", { staticClass: "error" }, [
+                      ? _c("span", { staticClass: "error text-danger" }, [
                           _vm._v(_vm._s(_vm.errors.e_postal_code[0]))
                         ])
                       : _vm._e()
@@ -38916,7 +38933,7 @@ var render = function() {
                     }),
                     _vm._v(" "),
                     _vm.errors.e_email
-                      ? _c("span", { staticClass: "error" }, [
+                      ? _c("span", { staticClass: "error text-danger" }, [
                           _vm._v(_vm._s(_vm.errors.e_email[0]))
                         ])
                       : _vm._e()
@@ -38952,7 +38969,7 @@ var render = function() {
                     }),
                     _vm._v(" "),
                     _vm.errors.e_status
-                      ? _c("span", { staticClass: "error" }, [
+                      ? _c("span", { staticClass: "error text-danger" }, [
                           _vm._v(_vm._s(_vm.errors.e_status[0]))
                         ])
                       : _vm._e()
@@ -38986,7 +39003,7 @@ var render = function() {
                     }),
                     _vm._v(" "),
                     _vm.errors.e_number
-                      ? _c("span", { staticClass: "error" }, [
+                      ? _c("span", { staticClass: "error text-danger" }, [
                           _vm._v(_vm._s(_vm.errors.e_number[0]))
                         ])
                       : _vm._e()
@@ -39138,7 +39155,13 @@ var render = function() {
                           )
                         }
                       }
-                    })
+                    }),
+                    _vm._v(" "),
+                    _vm.errors.e_card_id
+                      ? _c("span", { staticClass: "error text-danger" }, [
+                          _vm._v(_vm._s(_vm.errors.e_card_id[0]))
+                        ])
+                      : _vm._e()
                   ])
                 ]),
                 _vm._v(" "),
@@ -39176,7 +39199,13 @@ var render = function() {
                           )
                         }
                       }
-                    })
+                    }),
+                    _vm._v(" "),
+                    _vm.errors.e_last_name
+                      ? _c("span", { staticClass: "error text-danger" }, [
+                          _vm._v(_vm._s(_vm.errors.e_last_name[0]))
+                        ])
+                      : _vm._e()
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "form-group col-md-6" }, [
@@ -39212,7 +39241,13 @@ var render = function() {
                           )
                         }
                       }
-                    })
+                    }),
+                    _vm._v(" "),
+                    _vm.errors.e_first_name
+                      ? _c("span", { staticClass: "error text-danger" }, [
+                          _vm._v(_vm._s(_vm.errors.e_first_name[0]))
+                        ])
+                      : _vm._e()
                   ])
                 ]),
                 _vm._v(" "),
@@ -39250,7 +39285,13 @@ var render = function() {
                           )
                         }
                       }
-                    })
+                    }),
+                    _vm._v(" "),
+                    _vm.errors.e_birthday_date
+                      ? _c("span", { staticClass: "error text-danger" }, [
+                          _vm._v(_vm._s(_vm.errors.e_birthday_date[0]))
+                        ])
+                      : _vm._e()
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "form-group col-md-6" }, [
@@ -39286,7 +39327,13 @@ var render = function() {
                           )
                         }
                       }
-                    })
+                    }),
+                    _vm._v(" "),
+                    _vm.errors.e_city_of_birth
+                      ? _c("span", { staticClass: "error text-danger" }, [
+                          _vm._v(_vm._s(_vm.errors.e_city_of_birth[0]))
+                        ])
+                      : _vm._e()
                   ])
                 ]),
                 _vm._v(" "),
@@ -39320,7 +39367,13 @@ var render = function() {
                           )
                         }
                       }
-                    })
+                    }),
+                    _vm._v(" "),
+                    _vm.errors.e_city
+                      ? _c("span", { staticClass: "error text-danger" }, [
+                          _vm._v(_vm._s(_vm.errors.e_city[0]))
+                        ])
+                      : _vm._e()
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "form-group col-md-6" }, [
@@ -39352,7 +39405,13 @@ var render = function() {
                           )
                         }
                       }
-                    })
+                    }),
+                    _vm._v(" "),
+                    _vm.errors.e_adress
+                      ? _c("span", { staticClass: "error text-danger" }, [
+                          _vm._v(_vm._s(_vm.errors.e_adress[0]))
+                        ])
+                      : _vm._e()
                   ])
                 ]),
                 _vm._v(" "),
@@ -39390,7 +39449,13 @@ var render = function() {
                           )
                         }
                       }
-                    })
+                    }),
+                    _vm._v(" "),
+                    _vm.errors.e_postal_code
+                      ? _c("span", { staticClass: "error text-danger" }, [
+                          _vm._v(_vm._s(_vm.errors.e_postal_code[0]))
+                        ])
+                      : _vm._e()
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "form-group col-md-6" }, [
@@ -39422,7 +39487,13 @@ var render = function() {
                           )
                         }
                       }
-                    })
+                    }),
+                    _vm._v(" "),
+                    _vm.errors.e_email
+                      ? _c("span", { staticClass: "error text-danger" }, [
+                          _vm._v(_vm._s(_vm.errors.e_email[0]))
+                        ])
+                      : _vm._e()
                   ])
                 ]),
                 _vm._v(" "),
@@ -39456,7 +39527,13 @@ var render = function() {
                           )
                         }
                       }
-                    })
+                    }),
+                    _vm._v(" "),
+                    _vm.errors.e_status
+                      ? _c("span", { staticClass: "error text-danger" }, [
+                          _vm._v(_vm._s(_vm.errors.e_status[0]))
+                        ])
+                      : _vm._e()
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "form-group col-md-6" }, [
@@ -39488,7 +39565,13 @@ var render = function() {
                           )
                         }
                       }
-                    })
+                    }),
+                    _vm._v(" "),
+                    _vm.errors.e_number
+                      ? _c("span", { staticClass: "error text-danger" }, [
+                          _vm._v(_vm._s(_vm.errors.e_number[0]))
+                        ])
+                      : _vm._e()
                   ])
                 ])
               ])
@@ -39508,7 +39591,7 @@ var render = function() {
                 "button",
                 {
                   staticClass: "btn btn-success",
-                  attrs: { type: "button", "data-dismiss": "modal" },
+                  attrs: { type: "button" },
                   on: { click: _vm.employeeUpdate }
                 },
                 [_vm._v("Mettre à Jour")]
@@ -39564,31 +39647,7 @@ var render = function() {
     "div",
     { staticClass: "container-fluid" },
     [
-      _c("div", { staticClass: "form-row" }, [
-        _c("div", { staticClass: "col-row col-md-12" }, [
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.words,
-                expression: "words"
-              }
-            ],
-            staticClass: "form-control ml-3 mt-3",
-            attrs: { type: "text", placeholder: "Rechercher..." },
-            domProps: { value: _vm.words },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.words = $event.target.value
-              }
-            }
-          })
-        ])
-      ]),
+      _vm._m(0),
       _vm._v(" "),
       _c("add-employee", { on: { "employee-added": _vm.employeesRefresh } }),
       _vm._v(" "),
@@ -39596,7 +39655,7 @@ var render = function() {
         "table",
         { staticClass: "table table-hover  table-responsive ml-3" },
         [
-          _vm._m(0),
+          _vm._m(1),
           _vm._v(" "),
           _vm._l(_vm.employees.data, function(employee) {
             return _c("tbody", { key: employee.id }, [
@@ -39665,9 +39724,9 @@ var render = function() {
                     [
                       _c("div", { staticClass: "modal-dialog" }, [
                         _c("div", { staticClass: "modal-content" }, [
-                          _vm._m(1, true),
-                          _vm._v(" "),
                           _vm._m(2, true),
+                          _vm._v(" "),
+                          _vm._m(3, true),
                           _vm._v(" "),
                           _c("div", { staticClass: "modal-footer" }, [
                             _c(
@@ -39726,6 +39785,19 @@ var render = function() {
   )
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-row" }, [
+      _c("div", { staticClass: "col-row col-md-12" }, [
+        _c("input", {
+          staticClass: "form-control ml-3 mt-3",
+          attrs: { type: "text", placeholder: "Rechercher..." }
+        })
+      ])
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
