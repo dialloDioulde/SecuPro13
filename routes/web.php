@@ -26,6 +26,7 @@ Route::get('/employees/edit/{id}', 'EmployeeController@edit');
 Route::patch('/employees/edit/{id}', 'EmployeeController@update');
 Route::delete('/employees/{id}', 'EmployeeController@destroy');
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('home')->middleware('verified', 'mustbeapproved');
+Route::get('/mustbeapproved', 'HomeController@mustbeapproved')->name('mustbeapproved');

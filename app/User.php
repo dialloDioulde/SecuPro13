@@ -2,12 +2,14 @@
 
 namespace App;
 
+use App\Http\Controllers\Auth\MustVerifyEmailImproved;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
+    use MustVerifyEmailImproved; // Ici on appelle la classe qui permet l'envoie automatique de Mail à l'administateur après la vérification de l'email par l'Utilisateur
     use Notifiable;
 
     /**
