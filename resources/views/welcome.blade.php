@@ -26,7 +26,7 @@
                     <li class="nav-item active">
                         <router-link to="/" class="nav-link">HOME</router-link>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item active">
                         <router-link to="/employees" class="nav-link">EMPLOYÉS</router-link>
                     </li>
                     <li class="nav-item dropdown">
