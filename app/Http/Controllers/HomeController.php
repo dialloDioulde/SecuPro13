@@ -28,7 +28,7 @@ class HomeController extends Controller
 
     public function mustbeapproved()
     {
-        return view('mustbeapproved');
+        return view('admin.users.mustbeapproved');
     }
 
 }

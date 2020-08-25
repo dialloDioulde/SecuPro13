@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,3 +31,10 @@ Auth::routes(['verify' => true]);
 
 Route::get('/home', 'HomeController@index')->name('home')->middleware('verified', 'mustbeapproved');
 Route::get('/mustbeapproved', 'HomeController@mustbeapproved')->name('mustbeapproved');
+
+Route::get('/admin/users', 'AdminController@index')->name('admin.index')->middleware(['auth', 'isAdmin']);
+
+Route::get('/errors/not-an-admin', function (){
+    return view('admin.errors.not-an-admin');
+})->name('errors.not-an-admin');
+

@@ -38,4 +38,19 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
+    // On Vérifie si l'Utilisateur connecté est un Admin ou non 
+    public function isAdmin()
+    {
+        if($this->is_admin == true){
+            return true;
+        }
+        else{
+            return false;
+        }
+
+    }
+
+
 }
