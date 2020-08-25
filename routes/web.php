@@ -34,7 +34,15 @@ Route::get('/mustbeapproved', 'HomeController@mustbeapproved')->name('mustbeappr
 
 Route::get('/admin/users', 'AdminController@index')->name('admin.index')->middleware(['auth', 'isAdmin']);
 
+Route::get('/admin/approve/{id}', 'AdminController@approve')->name('admin.approve')->middleware(['auth', 'isAdmin']);
+
+Route::get('/admin/refuse/{id}', 'AdminController@refuse')->name('admin.refuse')->middleware(['auth', 'isAdmin']);
+
+Route::get('/admin/ban/{id}', 'AdminController@ban')->name('admin.ban')->middleware(['auth', 'isAdmin']);
+
 Route::get('/errors/not-an-admin', function (){
     return view('admin.errors.not-an-admin');
 })->name('errors.not-an-admin');
+
+
 
