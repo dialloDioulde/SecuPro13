@@ -4,6 +4,7 @@ namespace App;
 
 use App\Http\Controllers\Auth\MustVerifyEmailImproved;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -11,6 +12,7 @@ class User extends Authenticatable implements MustVerifyEmail
 {
     use MustVerifyEmailImproved; // Ici on appelle la classe qui permet l'envoie automatique de Mail à l'administateur après la vérification de l'email par l'Utilisateur
     use Notifiable;
+    use SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -40,7 +42,7 @@ class User extends Authenticatable implements MustVerifyEmail
     ];
 
 
-    // On Vérifie si l'Utilisateur connecté est un Admin ou non 
+    // On Vérifie si l'Utilisateur connecté est un Admin ou non
     public function isAdmin()
     {
         if($this->is_admin == true){
