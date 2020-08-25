@@ -37,11 +37,11 @@ class AdminController extends Controller
         $user = User::findOrFail($id);
 
         if($user->approved_at != null){
-            $user->approved_at = null;
-            $user->save();
+            $user->approved_at = null; // On enlève la Validation du compte avant de le suspendre en mettant approved_at à null
+            $user->save(); // On enrégistre la suspension
         }
 
-        User::destroy($id);
+        User::destroy($id); // On suspend le compte de l'Utilisateur
 
         return back();
     }
@@ -50,7 +50,7 @@ class AdminController extends Controller
     // La fonction ban permet de Bannir l'Utilisateur de la plateforme
     public function ban($id)
     {
-        $user = User::withTrashed()->findOrFail($id);
+        $user = User::withTrashed()->findOrFail($id); // On récupère l'utilisateur même s'il est déjà suspendu
 
         if(! $user->isAdmin()){
             if ($user->approved_at != null){

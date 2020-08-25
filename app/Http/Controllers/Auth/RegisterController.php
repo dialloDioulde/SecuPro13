@@ -49,11 +49,28 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        return Validator::make($data, [
+        $validator = Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
+
+        // On a ajouté ce bout de code pour empêcher un Utilisateur de se s'Inscrire à nouveau avec une adresse mail déjà banni sur notre plateforme
+        $validator->after(function ($validator){
+            $data = $validator->getData(); // On récupère les données après la validation
+
+            // Ici on cherche l'adresse mail renseigné parmi tous celles déjà banni par la plateforme
+            $userIsBanned = User::withTrashed()->where('email', $data['email'])->whereRaw('banned_at is not null')->count();
+
+            // Si on trouve que l'adresse mail est banni on lui notifie cela
+            if ($userIsBanned){
+                $validator->errors()->add('email', 'Le Compte associé à cette adresse mail est déjà Banni sur notre plateforme !');
+            }
+        });
+
+        // On retourne la validation des données
+        return $validator;
+
     }
 
     /**
