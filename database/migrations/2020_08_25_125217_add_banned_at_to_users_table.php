@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddDeletedAtToUsersTable extends Migration
+class AddBannedAtToUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,7 +15,7 @@ class AddDeletedAtToUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             //
-            $table->softDeletes(); // L'ajout de cette colonne permettra de désactiver un utilisateur sans le supprimer de la Base De Données
+            $table->timestamp('banned_at')->nullable()->after('deleted_at');
         });
     }
 
@@ -28,7 +28,7 @@ class AddDeletedAtToUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             //
-            $table->dropSoftDeletes();
+            $table->dropColumn('banned_at');
         });
     }
 }

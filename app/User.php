@@ -7,6 +7,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use function Symfony\Component\VarDumper\Dumper\esc;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -52,6 +53,51 @@ class User extends Authenticatable implements MustVerifyEmail
             return false;
         }
 
+    }
+
+    // On Vérifie si l'Utilisateur a confirmé ou non son adresse Mail
+    public function mailIsConfirmed()
+    {
+        if (! is_null($this->email_verified_at)){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    // On Vérifie si l'Utilisateur est approuvé ou non par l'Administrateur
+    public function isApproved()
+    {
+        if (is_null($this->approved_at)){
+            return false;
+        }
+        else{
+            return true;
+        }
+
+    }
+
+    // On Vérifie si le compte de l'Utilisateur est Suspendu ou non
+    public function isRefused()
+    {
+        if (is_null($this->deleted_at)){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+
+    // On si l'Utilisateur est Banni ou non de la platforme
+    public function isBanned()
+    {
+        if (! is_null($this->banned_at)){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
 
