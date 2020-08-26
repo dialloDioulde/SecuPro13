@@ -28,6 +28,7 @@ Route::patch('/employees/edit/{id}', 'EmployeeController@update');
 Route::delete('/employees/{id}', 'EmployeeController@destroy');
 
 Auth::routes(['verify' => true]);
+Route::post('login', 'Auth\LoginController@login')->name('login')->middleware('isNotBanned');
 
 Route::get('/home', 'HomeController@index')->name('home')->middleware('verified', 'mustbeapproved');
 Route::get('/mustbeapproved', 'HomeController@mustbeapproved')->name('mustbeapproved');

@@ -101,4 +101,16 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
 
+    // On si l'Utilisateur est Banni ou non de la platforme
+    public function isNotBanned()
+    {
+        if (is_null($this->banned_at)){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+
 }
