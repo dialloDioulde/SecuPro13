@@ -1,13 +1,11 @@
 @extends('layouts.app')
 
 
-
 @section('content')
-
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-12">
-                <table class="table table-striped">
+    <div class="col-md-12">
+        <div class="">
+            <div class="container" style="font-size: 18px;">
+                <table class="table table-hover  table-responsive ml-3">
                     <thead class="thead-dark">
                     <tr>
                         <th scope="col">ID</th>
@@ -19,7 +17,7 @@
                     <tbody>
                     @foreach($users as $user)
                         <tr>
-                            <th scope="row">{{$user->id}}</th>
+                            <td>{{$user->id}}</td>
                             <td>
                                 @if($user->isAdmin())
                                     <span class="badge badge-pill badge-success text-white">admin</span>
@@ -35,10 +33,10 @@
                                         @if($user->isApproved() && ! $user->isAdmin())
                                             <span class="badge badge-success text-white">Validé</span>
                                         @endif
-                                        @if($user->isRefused())
+                                        @if($user->isSuspended())
                                             <span class="badge badge-danger text-white">Suspendu</span>
                                         @endif
-                                        @if(! $user->isRefused() && ! $user->isApproved())
+                                        @if(! $user->isSuspended() && ! $user->isApproved())
                                             <span class="badge badge-danger text-white">Validation En Attente</span>
                                         @endif
                                     @endif
@@ -47,21 +45,38 @@
                             </td>
 
                             <td>{{$user->email}}</td>
-                            <td style="text-align: end">
+                            <td class="d-flex">
                                 @if($user->mailIsConfirmed())
+
+                                    @if($user->isBanned())
+                                        <a href="/admin/approve/{{$user->id}}">
+                                            <button class="btn btn-success mr-2">Valider</button>
+                                        </a>
+                                    @endif
+
                                     @if(! $user->isBanned())
                                         @if($user->isApproved() && ! $user->isAdmin())
-                                            <a href="/admin/refuse/{{$user->id}}" class="btn btn-warning">Suspendre</a>
+                                            <a href="/admin/suspend/{{$user->id}}">
+                                                <button class="btn btn-warning ml-2 mr-2">Suspendre</button>
+                                            </a>
                                         @endif
-                                        @if($user->isRefused())
-                                            <a href="/admin/approve/{{$user->id}}" class="btn btn-success">Valider</a>
+                                        @if($user->isSuspended())
+                                            <a href="/admin/approve/{{$user->id}}">
+                                                <button class="btn btn-success mr-2">Valider</button>
+                                            </a>
                                         @endif
-                                        @if(! $user->isRefused() && ! $user->isApproved())
-                                            <a href="/admin/approve/{{$user->id}}" class="btn btn-success">Valider</a>
-                                            <a href="/admin/refuse/{{$user->id}}" class="btn btn-warning">Suspendre</a>
+                                        @if(! $user->isSuspended() && ! $user->isApproved())
+                                            <a href="/admin/approve/{{$user->id}}">
+                                                <button class="btn btn-success mr-2">Valider</button>
+                                            </a>
+                                            <a href="/admin/suspend/{{$user->id}}">
+                                                <button class="btn btn-warning ml-2 mr-2">Suspendre</button>
+                                            </a>
                                         @endif
                                         @if(! $user->isAdmin())
-                                            <a href="/admin/ban/{{$user->id}}" class="btn btn-outline-danger">Bannir</a>
+                                            <a href="/admin/ban/{{$user->id}}">
+                                                <button class="btn btn-danger ml-2">Bannir</button>
+                                            </a>
                                         @endif
                                     @endif
                                 @endif
@@ -76,5 +91,6 @@
             </div>
         </div>
     </div>
+
 
 @endsection

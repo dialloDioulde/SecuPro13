@@ -1,6 +1,6 @@
 <template>
-    <div class="container">
-        Bienvenue !!
+    <div class="container bg-info">
+        Bienvenue !! Sur mon siyte web je suis DIALLO Mamadou
     </div>
 </template>
 

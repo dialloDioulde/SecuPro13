@@ -79,7 +79,7 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     // On Vérifie si le compte de l'Utilisateur est Suspendu ou non
-    public function isRefused()
+    public function isSuspended()
     {
         if (is_null($this->deleted_at)){
             return false;

@@ -1,5 +1,5 @@
 <template>
-    <div class="container-fluid">
+    <div class="container">
 
         <div class="form-row">
             <div class="col-row col-md-12">
@@ -34,6 +34,9 @@
                 <td>{{employee.e_status}}</td>
                 <td class="d-flex">
                     <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-primary mr-2 " data-toggle="modal" data-target="#editModal">
+                        VOIR
+                    </button>
                     <button type="button" class="btn btn-warning " data-toggle="modal" data-target="#editModal" @click="getEmployee(employee.id)">
                         EDITER
                     </button>
@@ -70,7 +73,7 @@
 
             </tr>
             </tbody>
-            <pagination :data="employees" @pagination-change-page="getResults" class="mt-2"></pagination>
+            <pagination :data="employees" @pagination-change-page="getResults" class="mt-2 justify-content-center"></pagination>
 
         </table>
         <edit-employee v-bind:employeesToEdit="employeesToEdit" @employee-update="employeesRefresh"></edit-employee>
@@ -108,8 +111,8 @@
             },
             deleteEmployee(id){
                 axios.delete('http://127.0.0.1:8000/employees/' + id)
-                .then(response => this.employees = response.data)
-                .catch(error => console.log(error));
+                    .then(response => this.employees = response.data)
+                    .catch(error => console.log(error));
             },
             employeesRefresh(employees){
                 this.employees = employees.data;

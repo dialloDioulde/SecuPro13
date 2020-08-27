@@ -10,7 +10,7 @@ class AdminController extends Controller
    {
        // Retourne tous les Utilisateurs inscrits en Bases De Données y compris ceux dont le compte est suspendu (withTrashed)
         $users = User::withTrashed()->paginate(10);
-        return view('admin.users.listUsers', compact('users'));
+        return view('admin.users.usersList', compact('users'));
    }
 
 
@@ -26,13 +26,17 @@ class AdminController extends Controller
             $user->deleted_at = null;
         }
 
+        if($user->banned_at != null){
+            $user->banned_at = null;
+        }
+
         $user->save(); // On enregistre la Validation du compte de l'Utilisateur
 
         return back(); // On retourne sur la même page
     }
 
     // La fonction refuse permet de Suspendre le compte de l'Utilisateur sans le supprimer de la Bases De Données
-    public function refuse($id)
+    public function suspend($id)
     {
         $user = User::findOrFail($id);
 

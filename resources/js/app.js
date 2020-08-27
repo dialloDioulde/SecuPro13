@@ -33,12 +33,14 @@ import Employees from './components/EmployeesComponent';
 
 const routes = [
     {
-        path: '/',
+        path: '/home',
         component: Home,
+        name:'home',
     },
     {
-        path: '/employees',
+        path: '/',
         component: Employees,
+        name:'employees',
     },
 ];
 

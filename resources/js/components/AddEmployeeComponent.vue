@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary my-3" data-toggle="modal" data-target="#addModal">
+        <button type="button" class="btn btn-primary mb-2 mt-2" data-toggle="modal" data-target="#addModal">
             INSCRIRE
         </button>
 

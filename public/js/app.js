@@ -2316,6 +2316,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -38572,7 +38575,7 @@ var render = function() {
     _c(
       "button",
       {
-        staticClass: "btn btn-primary my-3",
+        staticClass: "btn btn-primary mb-2 mt-2",
         attrs: {
           type: "button",
           "data-toggle": "modal",
@@ -39645,7 +39648,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "container-fluid" },
+    { staticClass: "container" },
     [
       _vm._m(0),
       _vm._v(" "),
@@ -39675,6 +39678,19 @@ var render = function() {
                 _c("td", [_vm._v(_vm._s(employee.e_status))]),
                 _vm._v(" "),
                 _c("td", { staticClass: "d-flex" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-primary mr-2 ",
+                      attrs: {
+                        type: "button",
+                        "data-toggle": "modal",
+                        "data-target": "#editModal"
+                      }
+                    },
+                    [_vm._v("\n                    VOIR\n                ")]
+                  ),
+                  _vm._v(" "),
                   _c(
                     "button",
                     {
@@ -39768,7 +39784,7 @@ var render = function() {
           }),
           _vm._v(" "),
           _c("pagination", {
-            staticClass: "mt-2",
+            staticClass: "mt-2 justify-content-center",
             attrs: { data: _vm.employees },
             on: { "pagination-change-page": _vm.getResults }
           })
@@ -39891,8 +39907,8 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container" }, [
-    _vm._v("\n    Bienvenue !!\n")
+  return _c("div", { staticClass: "container bg-info" }, [
+    _vm._v("\n    Bienvenue !! Sur mon siyte web je suis DIALLO Mamadou\n")
   ])
 }
 var staticRenderFns = []
@@ -55169,11 +55185,13 @@ Vue.component('pagination', __webpack_require__(/*! laravel-vue-pagination */ ".
 
 
 var routes = [{
-  path: '/',
-  component: _components_HomeComponent_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+  path: '/home',
+  component: _components_HomeComponent_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+  name: 'home'
 }, {
-  path: '/employees',
-  component: _components_EmployeesComponent__WEBPACK_IMPORTED_MODULE_2__["default"]
+  path: '/',
+  component: _components_EmployeesComponent__WEBPACK_IMPORTED_MODULE_2__["default"],
+  name: 'employees'
 }];
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]({
   routes: routes
