@@ -13,7 +13,6 @@ class User extends Authenticatable implements MustVerifyEmail
 {
     use MustVerifyEmailImproved; // Ici on appelle la classe qui permet l'envoie automatique de Mail à l'administateur après la vérification de l'email par l'Utilisateur
     use Notifiable;
-    use SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -78,7 +77,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     }
 
-    // On Vérifie si le compte de l'Utilisateur est Suspendu ou non
+    /* // On Vérifie si le compte de l'Utilisateur est Suspendu ou non
     public function isSuspended()
     {
         if (is_null($this->deleted_at)){
@@ -87,7 +86,7 @@ class User extends Authenticatable implements MustVerifyEmail
         else{
             return true;
         }
-    }
+    } */
 
     // On si l'Utilisateur est Banni ou non de la platforme
     public function isBanned()
@@ -111,6 +110,7 @@ class User extends Authenticatable implements MustVerifyEmail
             return false;
         }
     }
+
 
 
 }

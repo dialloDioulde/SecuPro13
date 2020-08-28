@@ -37,7 +37,8 @@
                     <button type="button" class="btn btn-primary mr-2 " data-toggle="modal" data-target="#editModal">
                         VOIR
                     </button>
-                    <button type="button" class="btn btn-warning " data-toggle="modal" data-target="#editModal" @click="getEmployee(employee.id)">
+                    <button type="button" class="btn btn-warning " data-toggle="modal" data-target="#editModal"
+                            @click="getEmployee(employee.id)">
                         EDITER
                     </button>
                     <!-- Button trigger modal -->
@@ -46,11 +47,13 @@
                     </button>
 
                     <!-- Modal -->
-                    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel"
+                         aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header bg-danger">
-                                    <h5 class="modal-title text-white" id="deleteModalLabel">CONFIRMATION DE SUPPRESSION</h5>
+                                    <h5 class="modal-title text-white" id="deleteModalLabel">CONFIRMATION DE
+                                        SUPPRESSION</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
@@ -62,8 +65,11 @@
 
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">ANNULER</button>
-                                    <button type="button" class="btn btn-danger" @click="deleteEmployee(employee.id)" data-dismiss="modal">CONFIRMER</button>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">ANNULER
+                                    </button>
+                                    <button type="button" class="btn btn-danger" @click="deleteEmployee(employee.id)"
+                                            data-dismiss="modal">CONFIRMER
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -73,20 +79,19 @@
 
             </tr>
             </tbody>
-            <pagination :data="employees" @pagination-change-page="getResults" class="mt-2 justify-content-center"></pagination>
+            <pagination :data="employees" @pagination-change-page="getResults"
+                        class="mt-2 justify-content-center"></pagination>
 
         </table>
         <edit-employee v-bind:employeesToEdit="employeesToEdit" @employee-update="employeesRefresh"></edit-employee>
     </div>
 
 
-
-
 </template>
 
 <script>
     export default {
-        data(){
+        data() {
             return {
                 employees: {},
                 employeesToEdit: {},
@@ -97,24 +102,24 @@
                 .then(response => this.employees = response.data)
                 .catch(error => console.log(error));
         },
-        methods:{
-            getResults(page = 1){
+        methods: {
+            getResults(page = 1) {
                 axios.get('http://127.0.0.1:8000/employeesLists?page=' + page)
                     .then(response => {
                         this.employees = response.data;
                     });
             },
-            getEmployee(id){
+            getEmployee(id) {
                 axios.get('http://127.0.0.1:8000/employees/edit/' + id)
                     .then(response => this.employeesToEdit = response.data)
                     .catch(error => console.log(error));
             },
-            deleteEmployee(id){
+            deleteEmployee(id) {
                 axios.delete('http://127.0.0.1:8000/employees/' + id)
                     .then(response => this.employees = response.data)
                     .catch(error => console.log(error));
             },
-            employeesRefresh(employees){
+            employeesRefresh(employees) {
                 this.employees = employees.data;
             }
         },

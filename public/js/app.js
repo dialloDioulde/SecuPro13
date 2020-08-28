@@ -55181,7 +55181,9 @@ Vue.use(vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]);
 
 Vue.component('add-employee', __webpack_require__(/*! ./components/AddEmployeeComponent.vue */ "./resources/js/components/AddEmployeeComponent.vue")["default"]);
 Vue.component('edit-employee', __webpack_require__(/*! ./components/EditEmployeeComponent.vue */ "./resources/js/components/EditEmployeeComponent.vue")["default"]);
-Vue.component('pagination', __webpack_require__(/*! laravel-vue-pagination */ "./node_modules/laravel-vue-pagination/dist/laravel-vue-pagination.common.js"));
+Vue.component('show-employee', __webpack_require__(/*! ./components/EmployeesComponent.vue */ "./resources/js/components/EmployeesComponent.vue")["default"]);
+Vue.component('pagination', __webpack_require__(/*! laravel-vue-pagination */ "./node_modules/laravel-vue-pagination/dist/laravel-vue-pagination.common.js")); // Routage
+
 
 
 var routes = [{
@@ -55189,7 +55191,7 @@ var routes = [{
   component: _components_HomeComponent_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
   name: 'home'
 }, {
-  path: '/',
+  path: '/employees',
   component: _components_EmployeesComponent__WEBPACK_IMPORTED_MODULE_2__["default"],
   name: 'employees'
 }];

@@ -25,18 +25,15 @@
 
 
                                 @if(! $user->mailIsConfirmed())
-                                    <span class="badge badge-info text-white">mail non confirmée</span>
+                                    <span class="badge badge-info text-white">mail non confirmé</span>
                                 @else
                                     @if($user->isBanned())
-                                        <span class="badge badge-danger text-white">Banni</span>
+                                        <span class="badge badge-danger text-white">Banni(e)</span>
                                     @else
                                         @if($user->isApproved() && ! $user->isAdmin())
-                                            <span class="badge badge-success text-white">Validé</span>
+                                            <span class="badge badge-success text-white">Approuvé(e)</span>
                                         @endif
-                                        @if($user->isSuspended())
-                                            <span class="badge badge-danger text-white">Suspendu</span>
-                                        @endif
-                                        @if(! $user->isSuspended() && ! $user->isApproved())
+                                        @if(! $user->isBanned() && ! $user->isApproved())
                                             <span class="badge badge-danger text-white">Validation En Attente</span>
                                         @endif
                                     @endif
@@ -50,32 +47,22 @@
 
                                     @if($user->isBanned())
                                         <a href="/admin/approve/{{$user->id}}">
-                                            <button class="btn btn-success mr-2">Valider</button>
+                                            <button class="btn btn-success mr-2">Approuver</button>
                                         </a>
                                     @endif
 
                                     @if(! $user->isBanned())
                                         @if($user->isApproved() && ! $user->isAdmin())
-                                            <a href="/admin/suspend/{{$user->id}}">
-                                                <button class="btn btn-warning ml-2 mr-2">Suspendre</button>
-                                            </a>
-                                        @endif
-                                        @if($user->isSuspended())
-                                            <a href="/admin/approve/{{$user->id}}">
-                                                <button class="btn btn-success mr-2">Valider</button>
-                                            </a>
-                                        @endif
-                                        @if(! $user->isSuspended() && ! $user->isApproved())
-                                            <a href="/admin/approve/{{$user->id}}">
-                                                <button class="btn btn-success mr-2">Valider</button>
-                                            </a>
-                                            <a href="/admin/suspend/{{$user->id}}">
-                                                <button class="btn btn-warning ml-2 mr-2">Suspendre</button>
-                                            </a>
-                                        @endif
-                                        @if(! $user->isAdmin())
                                             <a href="/admin/ban/{{$user->id}}">
-                                                <button class="btn btn-danger ml-2">Bannir</button>
+                                                <button class="btn btn-warning ml-2 mr-2">Bannir</button>
+                                            </a>
+                                        @endif
+                                        @if(! $user->isBanned() && ! $user->isApproved())
+                                            <a href="/admin/approve/{{$user->id}}">
+                                                <button class="btn btn-success mr-2">Approuver</button>
+                                            </a>
+                                            <a href="/admin/ban/{{$user->id}}">
+                                                <button class="btn btn-warning ml-2 mr-2">Bannir</button>
                                             </a>
                                         @endif
                                     @endif

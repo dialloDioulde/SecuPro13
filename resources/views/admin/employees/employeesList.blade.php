@@ -2,8 +2,11 @@
 
 @section('content')
 
-    <div class="container" style="font-size: 16px;">
-        <router-view></router-view>
+    <div class="container" style="font-size: 15px;">
+        <div id="app">
+            <show-employee></show-employee>
+        </div>
     </div>
+
 
 @endsection

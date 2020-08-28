@@ -28,8 +28,10 @@ Auth::routes(['verify' => true]);
 Route::post('login', 'Auth\LoginController@login')->name('login')->middleware('isNotBanned');
 
 // Admin
-Route::get('/', 'HomeController@index')->name('home');
-//Route::get('/', 'HomeController@index')->name('home')->middleware('verified', 'mustbeapproved');
+Route::get('/home', 'HomeController@index')->name('home'); //->middleware('verified', 'mustbeapproved');
+Route::get('/', 'HomeController@index')->name('home')->middleware('verified', 'mustbeapproved');
+
+Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout')->name('logout');
 
 
 // Admin Users, Employees
@@ -39,13 +41,19 @@ Route::get('/admin/usersDashboard', 'AdminUserController@index')->name('admin.da
 Route::get('/admin/employeesDashboard', 'AdminUserController@indexEmployees')->name('admin.dashboard.indexEmployees')->middleware(['auth', 'isAdmin']);
 
 
+Route::get('/admin/editEmailName/{id}', 'AdminUserController@editEmailName')->name('admin.editEmailName');
+Route::patch('/admin/updateEmailName/{id}', 'AdminUserController@updateEmailName')->name('admin.updateEmailName');
+Route::delete('/admin/deleteEmailName/{id}', 'AdminUserController@deleteEmailName')->name('admin.deleteEmailName');
+
+
+
 Route::get('/mustbeapproved', 'HomeController@mustbeapproved')->name('mustbeapproved');
 
 Route::get('/admin/users', 'AdminController@index')->name('admin.index')->middleware(['auth', 'isAdmin']);
 
 Route::get('/admin/approve/{id}', 'AdminController@approve')->name('admin.approve')->middleware(['auth', 'isAdmin']);
 
-Route::get('/admin/suspend/{id}', 'AdminController@suspend')->name('admin.refuse')->middleware(['auth', 'isAdmin']);
+//Route::get('/admin/suspend/{id}', 'AdminController@suspend')->name('admin.refuse')->middleware(['auth', 'isAdmin']);
 
 Route::get('/admin/ban/{id}', 'AdminController@ban')->name('admin.ban')->middleware(['auth', 'isAdmin']);
 

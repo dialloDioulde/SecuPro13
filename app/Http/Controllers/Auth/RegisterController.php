@@ -60,7 +60,8 @@ class RegisterController extends Controller
             $data = $validator->getData(); // On récupère les données après la validation
 
             // Ici on cherche l'adresse mail renseignée parmi toutes celles déjà banni par la plateforme
-            $userIsBanned = User::withTrashed()->where('email', $data['email'])->whereRaw('banned_at is not null')->count();
+            //$userIsBanned = User::withTrashed()->where('email', $data['email'])->whereRaw('banned_at is not null')->count();
+            $userIsBanned = User::where('email', $data['email'])->whereRaw('banned_at is not null')->count();
 
             // Si on trouve que l'adresse mail est banni on lui notifie cela
             if ($userIsBanned){

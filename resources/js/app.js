@@ -26,8 +26,11 @@ Vue.use(VueRouter);
 //Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('add-employee', require('./components/AddEmployeeComponent.vue').default);
 Vue.component('edit-employee', require('./components/EditEmployeeComponent.vue').default);
+Vue.component('show-employee', require('./components/EmployeesComponent.vue').default);
 Vue.component('pagination', require('laravel-vue-pagination'));
 
+
+// Routage
 import Home from './components/HomeComponent.vue';
 import Employees from './components/EmployeesComponent';
 
@@ -38,7 +41,7 @@ const routes = [
         name:'home',
     },
     {
-        path: '/',
+        path: '/employees',
         component: Employees,
         name:'employees',
     },

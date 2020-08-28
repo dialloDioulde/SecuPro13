@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Employee;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -14,11 +15,76 @@ class AdminUserController extends Controller
      */
     public function index()
     {
-        //
+
         // Retourne tous les Utilisateurs inscrits en Bases De Données y compris ceux dont le compte est suspendu (withTrashed)
-        $users = User::withTrashed()->paginate(10);
+         $users = User::paginate(10);
+        //$users = User::withTrashed()->paginate(10);
         return view('admin.users.usersDashboard', compact('users'));
     }
+
+
+    //
+    public function editEmailName($id)
+    {
+        $userData = User::find($id);
+        return view('admin.users.editEmailName', compact('userData'));
+    }
+
+    //
+    public function updateEmailName(Request $request, $id)
+    {
+        $user = User::find($id);
+
+        if($user){
+            $validate = null;
+
+            if($user->email === $request['email']){
+                $validate = $request->validate([
+                    'name' => 'required|min:3',
+                    'email' => 'required|email',
+                ]);
+            }else{
+                $validate = $request->validate([
+                    'name' => 'required|min:3',
+                    'email' => 'required|email|unique:users',
+                ]);
+            }
+
+            if ($validate){
+                $user->name = $request['name'];
+                $user->email = $request['email'];
+
+                $user->save();
+
+                return "ok";
+
+                //return view('profiles.show')->withUser($user);
+
+            }else{
+                return redirect()->back();
+            }
+        }
+
+
+    }
+
+
+    public function deleteEmailName($id)
+    {
+        $userData = User::findOrFail($id);
+
+        if ($userData){
+
+            $userData->approved_at = null;
+            $userData->banned_at = null;
+            $userData->save();
+
+            $userData->delete();
+            return "OK";
+        }
+
+    }
+
 
 
     // La fonction indexEmployees renvoie la views contenant le CRUD des Employés

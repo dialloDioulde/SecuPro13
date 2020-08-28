@@ -15,7 +15,7 @@ class AddBannedAtToUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             //
-            $table->timestamp('banned_at')->nullable()->after('deleted_at');
+            $table->timestamp('banned_at')->nullable();
         });
     }
 

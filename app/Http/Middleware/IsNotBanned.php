@@ -24,7 +24,8 @@ class IsNotBanned
             }
         }
         else if($request['email'] !== null){    // Dans le cas où l'Utilisateur n'est pas connecté on recpère l'adresse mail saisie
-            $user = User::withTrashed()->firstWhere('email', $request['email']); // On récupère l'Utilisateur en Bases De Données
+            //$user = User::withTrashed()->firstWhere('email', $request['email']); // On récupère l'Utilisateur en Bases De Données
+            $user = User::firstWhere('email', $request['email']); // On récupère l'Utilisateur en Bases De Données
 
             if($user === null || $user->isNotBanned()){ // Si l'Utilisateur se connecte pour la première fois ou s'il n'est pas banni on laisse la connexion s'executée
                 return $next($request);
