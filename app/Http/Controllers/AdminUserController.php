@@ -71,7 +71,7 @@ class AdminUserController extends Controller
 
     public function deleteEmailName($id)
     {
-        $userData = User::findOrFail($id);
+        $userData = User::find($id);
 
         if ($userData){
 
@@ -80,7 +80,7 @@ class AdminUserController extends Controller
             $userData->save();
 
             $userData->delete();
-            return "OK";
+            return $userData;
         }
 
     }

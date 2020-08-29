@@ -37,16 +37,12 @@
                             <button class="btn btn-warning ml-4">EDITER</button>
                         </a>
 
-                        <form action="{{ route('admin.deleteEmailName', $user->id) }}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <button class="btn btn-danger ml-4">SUPPRIMER</button>
-                        </form>
+                        <a href="#">
+                            <button class="btn btn-danger ml-4 mr-2 deletebtn">SUPPRIMER</button>
+                        </a>
 
                     </td>
                 </tr>
-
-
 
             @endforeach
 
@@ -58,5 +54,76 @@
     </div>
 
 
+
+    <!-- Modal -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+
+                <div class="modal-body" style="font-size: 18px">
+
+                    <form id="deleteform">
+                        @csrf
+                        @method('DELETE')
+
+                        <input type="hidden" name="id" id="delete_id">
+
+                        <p class="text-center">Confirmer la Suppression ? </p>
+
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-danger">OUI</button>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">NON</button>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        // Début du Ajax permettant de Supprimer un Utilisateur
+        $('.deletebtn').on('click', function () {
+            $('#deleteModal').modal('show');
+            $tr = $(this).closest('tr');
+            var data = $tr.children("td").map(function () {
+                return $(this).text();
+            }).get();
+            console.log(data);
+            $('#delete_id').val(data[0]);
+        });
+        $('#deleteform').on('submit', function (e) {
+            e.preventDefault();
+            let id = $('#delete_id').val();
+            $.ajax({
+                type: "DELETE",
+                url: "/admin/deleteEmailName/" + id,
+                data: $('#deleteform').serialize(),
+                success: function (response) {
+                    console.log(response);
+                    $('#deleteModal').modal('hide');
+                    //alert('Le Post a été Supprimé avec Succès !');
+                    location.reload();
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        });
+        // Fin du code Ajax permettant de Supprimer un Utilisateur
+
+
+    });
+
+</script>
 
 @endsection

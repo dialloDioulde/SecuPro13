@@ -2316,9 +2316,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -39738,25 +39735,22 @@ var render = function() {
                       }
                     },
                     [
-                      _c("div", { staticClass: "modal-dialog" }, [
+                      _c("div", { staticClass: "modal-dialog modal-sm" }, [
                         _c("div", { staticClass: "modal-content" }, [
-                          _vm._m(2, true),
-                          _vm._v(" "),
-                          _vm._m(3, true),
+                          _c(
+                            "div",
+                            {
+                              staticClass: "modal-body",
+                              staticStyle: { "font-size": "18px" }
+                            },
+                            [
+                              _vm._v(
+                                "\n\n                                Confirmer la Suppression ?\n\n                            "
+                              )
+                            ]
+                          ),
                           _vm._v(" "),
                           _c("div", { staticClass: "modal-footer" }, [
-                            _c(
-                              "button",
-                              {
-                                staticClass: "btn btn-secondary",
-                                attrs: {
-                                  type: "button",
-                                  "data-dismiss": "modal"
-                                }
-                              },
-                              [_vm._v("ANNULER")]
-                            ),
-                            _vm._v(" "),
                             _c(
                               "button",
                               {
@@ -39771,7 +39765,19 @@ var render = function() {
                                   }
                                 }
                               },
-                              [_vm._v("CONFIRMER")]
+                              [_vm._v("OUI\n                                ")]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-primary",
+                                attrs: {
+                                  type: "button",
+                                  "data-dismiss": "modal"
+                                }
+                              },
+                              [_vm._v("NON\n                                ")]
                             )
                           ])
                         ])
@@ -39837,53 +39843,6 @@ var staticRenderFns = [
         _c("th", { attrs: { scope: "col" } }, [_vm._v("ACTIONS")])
       ])
     ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-header bg-danger" }, [
-      _c(
-        "h5",
-        {
-          staticClass: "modal-title text-white",
-          attrs: { id: "deleteModalLabel" }
-        },
-        [_vm._v("CONFIRMATION DE SUPPRESSION")]
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "close",
-          attrs: {
-            type: "button",
-            "data-dismiss": "modal",
-            "aria-label": "Close"
-          }
-        },
-        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "modal-body", staticStyle: { "font-size": "18px" } },
-      [
-        _vm._v(
-          "\n                                Attention cette action est Irreversible ! "
-        ),
-        _c("br"),
-        _c("br"),
-        _vm._v(
-          "\n\n                                Confirmer votre action ?\n\n                            "
-        )
-      ]
-    )
   }
 ]
 render._withStripped = true

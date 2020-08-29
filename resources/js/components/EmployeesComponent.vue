@@ -49,26 +49,18 @@
                     <!-- Modal -->
                     <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel"
                          aria-hidden="true">
-                        <div class="modal-dialog">
+                        <div class="modal-dialog modal-sm">
                             <div class="modal-content">
-                                <div class="modal-header bg-danger">
-                                    <h5 class="modal-title text-white" id="deleteModalLabel">CONFIRMATION DE
-                                        SUPPRESSION</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
                                 <div class="modal-body" style="font-size: 18px">
-                                    Attention cette action est Irreversible ! <br><br>
 
-                                    Confirmer votre action ?
+                                    Confirmer la Suppression ?
 
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">ANNULER
-                                    </button>
                                     <button type="button" class="btn btn-danger" @click="deleteEmployee(employee.id)"
-                                            data-dismiss="modal">CONFIRMER
+                                            data-dismiss="modal">OUI
+                                    </button>
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal">NON
                                     </button>
                                 </div>
                             </div>
