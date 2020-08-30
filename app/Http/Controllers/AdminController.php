@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Role;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -71,6 +72,23 @@ class AdminController extends Controller
 
         return back();
 
+    }
+
+
+    public function editRole(User $user)
+    {
+        //
+        $roles = Role::all();
+
+        return view('admin.users.editRole', compact('user', 'roles'));
+    }
+
+
+    public function updateRole(Request $request, User $user)
+    {
+        //
+        $user->roles()->sync($request->roles);
+        return "ok";
     }
 
 

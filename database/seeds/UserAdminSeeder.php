@@ -15,7 +15,7 @@ class UserAdminSeeder extends Seeder
     public function run()
     {
         //
-        User::create([
+        /* User::create([
             'name' => 'admin',
             'email' => 'user@admin.fr',
             'email_verified_at' => now(),
@@ -23,6 +23,6 @@ class UserAdminSeeder extends Seeder
             'remember_Token' => Str::random(10),
             'is_admin' => 1,
             'approved_at' => now(),
-        ]);
+        ]); */
     }
 }

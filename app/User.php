@@ -9,6 +9,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use function Symfony\Component\VarDumper\Dumper\esc;
 
+use App\Role;
+
 class User extends Authenticatable implements MustVerifyEmail
 {
     use MustVerifyEmailImproved; // Ici on appelle la classe qui permet l'envoie automatique de Mail à l'administateur après la vérification de l'email par l'Utilisateur
@@ -41,8 +43,26 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
+    //
+    public function roles(){
+        return $this->belongsToMany('App\Role');
+    }
 
-    // On Vérifie si l'Utilisateur connecté est un Admin ou non
+
+    // Cette fonction permet de récupérer que les Utilisateurs ayant le rôle ADMIN
+    public function isAdmin(){
+        return $this->roles()->where('name','admin')->first();
+    }
+
+
+    // Cette fonction permet de récupérer tous les rôles d'un Utilisateur
+    public function hasAnyRole(array $roles){
+        return $this->roles()->whereIn('name',$roles)->first();
+    }
+
+
+
+    /* // On Vérifie si l'Utilisateur connecté est un Admin ou non
     public function isAdmin()
     {
         if($this->is_admin == true){
@@ -52,7 +72,8 @@ class User extends Authenticatable implements MustVerifyEmail
             return false;
         }
 
-    }
+    } */
+
 
     // On Vérifie si l'Utilisateur a confirmé ou non son adresse Mail
     public function mailIsConfirmed()

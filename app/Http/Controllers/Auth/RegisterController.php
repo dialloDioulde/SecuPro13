@@ -8,7 +8,7 @@ use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-
+use App\Role;
 class RegisterController extends Controller
 {
     /*
@@ -82,10 +82,17 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+
+
+        $role = Role::select('id')->where('name','user')->first(); // On selectionne le ID du rôle user
+
+        $user->roles()->attach($role); // On assigne le rôle de user à l'Utilisateur lors de son inscription
+        return $user;
+
     }
 }

@@ -10,7 +10,6 @@
                 <th scope="col">ID</th>
                 <th scope="col">NOM</th>
                 <th scope="col">EMAIL</th>
-                <th scope="col">STATUT</th>
                 <th scope="col" class="text-center">ACTIONS</th>
             </tr>
             </thead>
@@ -21,12 +20,6 @@
                     <td>{{$user->name}}</td>
                     <td>{{$user->email}}</td>
 
-                    @if($user->isAdmin() == true)
-                        <td><span class="badge badge-pill badge-success text-white">admin</span> @else </td>
-                    @endif
-                    @if( $user->isAdmin() == false)
-                        <td><span class="badge badge-pill badge-primary text-white">utilisateur</span></td>
-                    @endif
 
                     <td class="d-flex">
                         <a href="#">

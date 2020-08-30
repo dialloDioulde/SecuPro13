@@ -11,6 +11,7 @@
                         <th scope="col">ID</th>
                         <th scope="col">NOM</th>
                         <th scope="col">EMAIL</th>
+                        <th scope="col">STATUT</th>
                         <th scope="col" class="text-center">ACTIONS</th>
                     </tr>
                     </thead>
@@ -19,9 +20,6 @@
                         <tr>
                             <td>{{$user->id}}</td>
                             <td>
-                                @if($user->isAdmin())
-                                    <span class="badge badge-pill badge-success text-white">admin</span>
-                                @endif
 
 
                                 @if(! $user->mailIsConfirmed())
@@ -42,7 +40,20 @@
                             </td>
 
                             <td>{{$user->email}}</td>
+
+                            <td>
+                                <span class="badge badge-pill badge-success text-white">
+                                    {{implode(',', $user->roles()->get()->pluck('name')->toArray())}}
+                                </span>
+                            </td>
+
+
+
                             <td class="d-flex">
+                                <a href="/admin/editRole/{{$user->id}}">
+                                    <button class="btn btn-warning mr-2">EDITER</button>
+                                </a>
+
                                 @if($user->mailIsConfirmed())
 
                                     @if($user->isBanned())
@@ -54,16 +65,14 @@
                                     @if(! $user->isBanned())
                                         @if($user->isApproved() && ! $user->isAdmin())
                                             <a href="/admin/ban/{{$user->id}}">
-                                                <button class="btn btn-warning ml-2 mr-2">Bannir</button>
+                                                <button class="btn btn-secondary ml-2 mr-2">Bannir</button>
                                             </a>
                                         @endif
                                         @if(! $user->isBanned() && ! $user->isApproved())
                                             <a href="/admin/approve/{{$user->id}}">
                                                 <button class="btn btn-success mr-2">Approuver</button>
                                             </a>
-                                            <a href="/admin/ban/{{$user->id}}">
-                                                <button class="btn btn-warning ml-2 mr-2">Bannir</button>
-                                            </a>
+
                                         @endif
                                     @endif
                                 @endif
